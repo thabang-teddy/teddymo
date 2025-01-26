@@ -20,32 +20,4 @@ class DashboardController extends Controller
             ],
         ]);
     }
-
-    public function contacts()
-    {
-        // $contacts = Contact::where('is_deleted', false)->get();
-
-        // return Inertia::render('Dashboard/Contacts/Index', [
-        //     'contacts' => $contacts,
-        // ]);
-
-        $contacts = Contact::orderBy('created_at', 'desc')->get();
-        return Inertia::render('Dashboard/Contacts/Index', [
-            'contacts' => $contacts,
-        ]);
-    }
-
-    public function contactsDetails($id)
-    {
-        // $contact = Contact::findOrFail($id);
-
-        // return Inertia::render('Dashboard/Contacts/Show', [
-        //     'contact' => $contact,
-        // ]);
-
-        $contact = Contact::findOrFail($id);
-        return Inertia::render('Dashboard/Contacts/View', [
-            'contact' => $contact,
-        ]);
-    }
 }

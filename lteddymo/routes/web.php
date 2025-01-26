@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DashboardContactsController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardExperiencesController;
+use App\Http\Controllers\DashboardPortfoliosController;
 use App\Http\Controllers\ElitoController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\HomeController;
@@ -42,9 +45,31 @@ Route::middleware('auth')->group(function () {
 // });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Dashboard Routes
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
-    Route::get('/dashboard/contacts', [DashboardController::class, 'contacts'])->name('dashboard.contacts');
-    Route::get('/dashboard/contacts/{id}', [DashboardController::class, 'contactsDetails'])->name('dashboard.contactsDetails');
+    Route::get('/dashboard/contacts', [DashboardContactsController::class, 'index'])->name('dashboard.contacts.index');
+    Route::get('/dashboard/contacts/{id}', [DashboardContactsController::class, 'view'])->name('dashboard.contacts.view');
+
+    // // Portfolio Routes
+    // Route::get('/dashboard/portfolios', [PortfolioController::class, 'index'])->name('dashboard.portfolios.index');
+    // Route::get('/dashboard/portfolios/create', [PortfolioController::class, 'create'])->name('dashboard.portfolios.create');
+    // Route::post('/dashboard/portfolios', [PortfolioController::class, 'store'])->name('dashboard.portfolios.store');
+    // Route::get('/dashboard/portfolios/{portfolio}/edit', [PortfolioController::class, 'edit'])->name('dashboard.portfolios.edit');
+    // Route::put('/dashboard/portfolios/{portfolio}', [PortfolioController::class, 'update'])->name('dashboard.portfolios.update');
+    // Route::delete('/dashboard/portfolios/{portfolio}', [PortfolioController::class, 'destroy'])->name('dashboard.portfolios.destroy');
+
+    // // Experience Routes
+    // Route::get('/dashboard/experiences', [ExperienceController::class, 'index'])->name('dashboard.experiences.index');
+    // Route::get('/dashboard/experiences/create', [ExperienceController::class, 'create'])->name('dashboard.experiences.create');
+    // Route::post('/dashboard/experiences', [ExperienceController::class, 'store'])->name('dashboard.experiences.store');
+    // Route::get('/dashboard/experiences/{experience}/edit', [ExperienceController::class, 'edit'])->name('dashboard.experiences.edit');
+    // Route::put('/dashboard/experiences/{experience}', [ExperienceController::class, 'update'])->name('dashboard.experiences.update');
+    // Route::delete('/dashboard/experiences/{experience}', [ExperienceController::class, 'destroy'])->name('dashboard.experiences.destroy');
+
+    // Portfolio & Experience Resource Routes
+    Route::resource('/dashboard/portfolios', DashboardPortfoliosController::class)->except(['show']);
+    Route::resource('/dashboard/experiences', DashboardExperiencesController::class)->except(['show']);
+
 });
 
 require __DIR__.'/auth.php';

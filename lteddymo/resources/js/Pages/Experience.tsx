@@ -3,22 +3,20 @@ import { Head } from "@inertiajs/react";
 import MainLayout from "../Layouts/MainLayout";
 import { CalculateTimeSince } from "@/Funtion/CalculateTimeSince";
 
-interface Project {
+interface Experience {
 	id: number;
 	title: string;
 	description: string;
 	technologies: string[];
-	imageUrl: string;
 }
 
-const projects: Project[] = [
+const experiences: Experience[] = [
 	{
 		id: 1,
 		title: "E-commerce Website",
 		description:
 			"Working on a team to develop a fully functional e-commerce platform for a leading distributor of branded promotional products.",
 		technologies: ["C#", "ASP.NET MVC", "SQL Server", "JavaScript"],
-		imageUrl: "/placeholder.svg?height=200&width=300",
 	},
 	{
 		id: 2,
@@ -26,7 +24,6 @@ const projects: Project[] = [
 		description:
 			"Implemented a PIM admin system to streamline data handling and improve operational efficiency.",
 		technologies: ["C#", "ASP.NET MVC", "SQL Server", "RESTful APIs"],
-		imageUrl: "/placeholder.svg?height=200&width=300",
 	},
 	{
 		id: 3,
@@ -34,7 +31,6 @@ const projects: Project[] = [
 		description:
 			"Built a user-friendly customer portal for managing orders, tracking shipments, and accessing support resources.",
 		technologies: ["C#", "ASP.NET Core", "React", "SQL Server"],
-		imageUrl: "/placeholder.svg?height=200&width=300",
 	},
 ];
 
@@ -97,40 +93,40 @@ export default function Experience() {
 										</li>
 									</ul>
 								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className="row justify-content-center">
-					<div className="col-md-12">
-						<h1 className="mb-4">Responsibilities</h1>
-						<div className="row">
-							{projects.map((project) => (
-								<div key={project.id} className="col-md-4 mb-4">
-									<div className="card h-100">
-										<div className="card-body">
-											<h2 className="card-title h5">
-												{project.title}
-											</h2>
-											<p className="card-text">
-												{project.description}
-											</p>
-											<div className="mt-3">
-												{project.technologies.map(
-													(tech, index) => (
-														<span
-															key={index}
-															className="badge bg-secondary me-1"
-														>
-															{tech}
-														</span>
-													)
-												)}
-											</div>
+								<h2 className="mb-4">Responsibilities</h2>
+								<div className="row justify-content-center">
+									<div className="col-md-12">
+										<div className="row">
+											{experiences.map((project) => (
+												<div key={project.id} className="col-md-4 mb-4">
+													<div className="card h-100">
+														<div className="card-body">
+															<h2 className="card-title h5">
+																{project.title}
+															</h2>
+															<p className="card-text">
+																{project.description}
+															</p>
+															<div className="mt-3">
+																{project.technologies.map(
+																	(tech, index) => (
+																		<span
+																			key={index}
+																			className="badge bg-secondary me-1"
+																		>
+																			{tech}
+																		</span>
+																	)
+																)}
+															</div>
+														</div>
+													</div>
+												</div>
+											))}
 										</div>
 									</div>
 								</div>
-							))}
+							</div>
 						</div>
 					</div>
 				</div>

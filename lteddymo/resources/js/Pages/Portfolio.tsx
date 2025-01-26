@@ -8,6 +8,7 @@ interface Project {
 	description: string;
 	technologies: string[];
 	imageUrl: string;
+	link: string,
 }
 
 const projects: Project[] = [
@@ -17,14 +18,16 @@ const projects: Project[] = [
 		description:
 			"Developed a fully functional e-commerce platform for a leading distributor of branded promotional products.",
 		technologies: ["C#", "ASP.NET MVC", "SQL Server", "JavaScript"],
+		link: "giwu.teddymo.co.za",
 		imageUrl: "/placeholder.svg?height=200&width=300",
 	},
 	{
 		id: 2,
 		title: "My Portfolio Website",
 		description:
-			"This project is a modern web application built with Laravel 11, React, and Inertia.js. The application is designed to showcase portfolio projects and leverages SQLite as its database for simplicity and ease of deployment. The Laravel backend manages routing, authentication, and data handling, while the React frontend provides a seamless user experience. Inertia.js bridges the backend and frontend, enabling efficient single-page app-like navigation without a heavy API layer. The site includes features like project listings, user interaction, and data persistence, tailored to highlight portfolio items effectively.",
-		technologies: ["PHP", "Laravel 11", "SQLite", "React"],
+			"This project is a modern web application built with Laravel 11, React, and Inertia.js. The application saves data in an SQLite database for simplicity and ease of deployment. The website has an admin section where I view contact messages, crud for portfolio, and crud for experience.",
+		technologies: ["PHP", "Laravel 11", "SQLite", "React", "Bootstrap"],
+		link: "teddymo.co.za",
 		imageUrl: "/placeholder.svg?height=200&width=300",
 	},
 	{
@@ -32,7 +35,8 @@ const projects: Project[] = [
 		title: "Flutter App",
 		description:
 			"Built a user-friendly customer portal for managing orders, tracking shipments, and accessing support resources.",
-		technologies: ["Dart", "Flutter", "React", "SQLite"],
+		technologies: ["Dart", "Flutter", "SQLite"],
+		link: "teddymo.co.za/port",
 		imageUrl: "/placeholder.svg?height=200&width=300",
 	},
 ];

@@ -46,7 +46,7 @@ export default function Authenticated({
 							</li>
 							<li className="nav-item">
 								<Link
-									href={route("dashboard.contacts")}
+									href={route("dashboard.contacts.index")}
 									className={`nav-link ${
 										isActive("/") ? "active" : ""
 									}`}
@@ -56,12 +56,32 @@ export default function Authenticated({
 							</li>
 							<li className="nav-item">
 								<Link
-									href={route("profile.edit")}
+									href={route("experiences.index")}
 									className={`nav-link ${
-										isActive("/portfolio") ? "active" : ""
+										isActive("/experiences") ? "active" : ""
+									}`}
+								>
+									Experience
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link
+									href={route("portfolios.index")}
+									className={`nav-link ${
+										isActive("/portfolios") ? "active" : ""
 									}`}
 								>
 									Portfolio
+								</Link>
+							</li>
+							<li className="nav-item">
+								<Link
+									href={route("profile.edit")}
+									className={`nav-link ${
+										isActive("/profile") ? "active" : ""
+									}`}
+								>
+									profile
 								</Link>
 							</li>
 							<li className="nav-item">

@@ -48,7 +48,7 @@ const View: React.FC<Props> = ({ contact }) => {
                         <p className="card-text">
                             <strong>Date:</strong> {new Date(contact.created_at).toLocaleDateString()}
                         </p>
-                        <Link href="/dashboard/contacts" className="btn btn-secondary">
+                        <Link href={route("dashboard.contacts.index")} className="btn btn-secondary">
                             Back to List
                         </Link>
                     </div>
