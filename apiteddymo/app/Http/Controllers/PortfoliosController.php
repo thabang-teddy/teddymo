@@ -60,6 +60,7 @@ class PortfoliosController extends Controller
     public function get(): JsonResponse
     {
         return response()->json(Portfolio::all());
+        // return response()->json(['message' => 'Portfolio deleted successfully.'], 200);
     }
 
 }

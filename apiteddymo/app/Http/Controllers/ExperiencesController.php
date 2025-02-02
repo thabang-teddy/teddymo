@@ -19,7 +19,7 @@ class ExperiencesController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'technologies' => 'required|array',
-            'link' => 'required|url',
+            'link' => 'required|string',
             'imageUrl' => 'required|string',
         ]);
 
@@ -39,7 +39,7 @@ class ExperiencesController extends Controller
             'title' => 'string|max:255',
             'description' => 'string',
             'technologies' => 'array',
-            'link' => 'url',
+            'link' => 'string',
             'imageUrl' => 'string',
         ]);
 

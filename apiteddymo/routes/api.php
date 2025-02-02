@@ -1,11 +1,11 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactsController;
+use App\Http\Controllers\ExperiencesController;
 use App\Http\Controllers\PortfoliosController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 
 Route::get('/', function (Request $request) {
     return "API";
@@ -13,6 +13,9 @@ Route::get('/', function (Request $request) {
 
 Route::get('/portfolios/get', [PortfoliosController::class, 'get']);
 
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+     
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('portfolios')->group(function () {
         Route::get('/', [PortfoliosController::class, 'index']);
@@ -20,6 +23,14 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/{portfolio}', [PortfoliosController::class, 'show']);
         Route::put('/{portfolio}', [PortfoliosController::class, 'update']);
         Route::delete('/{portfolio}', [PortfoliosController::class, 'destroy']);
+    });
+
+    Route::prefix('experiences')->group(function () {
+        Route::get('/', [ExperiencesController::class, 'index']);
+        Route::post('/', [ExperiencesController::class, 'store']);
+        Route::get('/{experience}', [ExperiencesController::class, 'show']);
+        Route::put('/{experience}', [ExperiencesController::class, 'update']);
+        Route::delete('/{experience}', [ExperiencesController::class, 'destroy']);
     });
 
     // Contact API Routes
@@ -30,5 +41,3 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('/{contact}', [ContactsController::class, 'destroy']);
     });
 });
-
-require __DIR__.'/auth.php';

@@ -17,12 +17,12 @@ class ContactsController extends Controller
 
     public function store(Request $request): JsonResponse
     {
+
         $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'technologies' => 'required|array',
-            'link' => 'required|url',
-            'imageUrl' => 'required|string',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:500',
         ]);
 
         $contact = Contact::create($validated);
@@ -38,11 +38,10 @@ class ContactsController extends Controller
     public function update(Request $request, Contact $contact): JsonResponse
     {
         $validated = $request->validate([
-            'title' => 'string|max:255',
-            'description' => 'string',
-            'technologies' => 'array',
-            'link' => 'url',
-            'imageUrl' => 'string',
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:500',
         ]);
 
         $contact->update($validated);
