@@ -1,34 +1,46 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ExperienceCreateType, ExperienceType } from "../../Types/global";
-import { createExperience } from "./Thunk";
+import { createSlice } from "@reduxjs/toolkit";
+import { ExperienceType } from "../../Types/global";
 
 interface ExperienceState {
-  experiences: ExperienceType[];
-  selectedExperience: ExperienceType | null;
+  all: ExperienceType[];
+  loading: Boolean;
+  error: string[] | null;
 }
 
 const initialState: ExperienceState = {
-  experiences: [],
-  selectedExperience: null
+  all: [],
+  loading: false,
+  error: null,
 };
 
 const experienceSlice = createSlice({
   name: "experiences",
   initialState,
   reducers: {
-    experienceSuccess(state, action) {
-      state.experiences = action.payload;
+    experiencesSuccess(state, action) {
+      state.all = action.payload;
+      state.loading = false;
     },
-    selectExperience(state, action) {
-      let experienceIndex = state.experiences.findIndex(sp => sp.id != null && sp.id === action.payload);
-      if (state.experiences[experienceIndex] != null) {
-        localStorage.setItem("experienceId", action.payload);
-        state.selectedExperience = state.experiences[experienceIndex];
-      } else {
-		    localStorage.removeItem("experienceId");
-      }
+    createExperienceSuccess(state, action) {
+      state.all = [...state.all, action.payload];
+      state.loading = false;
+    },
+    UpdateExperienceSuccess(state, action) {
+      state.all = [...state.all, action.payload];
+      state.loading = false;
+    },
+    deleteExperienceSuccess(state, action) {
+      state.all = [...state.all, action.payload];
+      state.loading = false;
     }
   },
 });
+
+export const {
+  experiencesSuccess,
+  createExperienceSuccess,
+  UpdateExperienceSuccess,
+  deleteExperienceSuccess
+} = experienceSlice.actions
 
 export default experienceSlice.reducer;

@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('experiences', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('title');
+            $table->string('jobtitle');
+            $table->json('company');
+            $table->text('duration');
             $table->text('description');
-            $table->json('technologies');
-            $table->string('link');
-            $table->string('imageUrl');
+            $table->string('link')->nullable();
+            $table->boolean('is_active')->default(false);
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });

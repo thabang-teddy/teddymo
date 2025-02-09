@@ -1,46 +1,21 @@
 
+import { useEffect } from "react";
 import MainLayout from "../Layouts/MainLayout";
-
-interface Project {
-	id: number;
-	title: string;
-	description: string;
-	technologies: string[];
-	imageUrl: string;
-	link: string,
-}
-
-const projects: Project[] = [
-	{
-		id: 1,
-		title: "GIWU",
-		description:
-			"Developed a fully functional e-commerce platform for a leading distributor of branded promotional products.",
-		technologies: ["C#", "ASP.NET MVC", "SQL Server", "JavaScript"],
-		link: "giwu.teddymo.co.za",
-		imageUrl: "/placeholder.svg?height=200&width=300",
-	},
-	{
-		id: 2,
-		title: "My Portfolio Website",
-		description:
-			"This project is a modern web application built with Laravel 11, React, and Inertia.js. The application saves data in an SQLite database for simplicity and ease of deployment. The website has an admin section where I view contact messages, crud for portfolio, and crud for experience.",
-		technologies: ["PHP", "Laravel 11", "SQLite", "React", "Bootstrap"],
-		link: "teddymo.co.za",
-		imageUrl: "/placeholder.svg?height=200&width=300",
-	},
-	{
-		id: 3,
-		title: "Flutter App",
-		description:
-			"Built a user-friendly customer portal for managing orders, tracking shipments, and accessing support resources.",
-		technologies: ["Dart", "Flutter", "SQLite"],
-		link: "teddymo.co.za/port",
-		imageUrl: "/placeholder.svg?height=200&width=300",
-	},
-];
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
+import { getPortfolios } from "../slices/Portfolios/Thunk";
 
 export default function Portfolio() {
+	const dispatch = useDispatch<any>();
+
+	const portfolios = useSelector((state: RootState) => state.portfolios.all);
+	
+	useEffect(() => {
+		if (portfolios == null || portfolios.length < 1 ) {
+			dispatch(getPortfolios ());
+		}
+	}, []);
+
 	return (
 		<MainLayout title="Portfolio">
 			<div className="container">
@@ -48,7 +23,7 @@ export default function Portfolio() {
 					<div className="col-md-12">
 						<h1 className="mb-4">Portfolio</h1>
 						<div className="row">
-							{projects.map((project) => (
+							{portfolios.map((project) => (
 								<div key={project.id} className="col-md-4 mb-4">
 									<div className="card h-100">
 										<div className="card-body">

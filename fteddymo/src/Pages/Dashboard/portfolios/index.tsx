@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPortfolios, deletePortfolio } from "../../../slices/Portfolios/Thunk";
+import { getAllPortfolios, deletePortfolio } from "../../../slices/Portfolios/Thunk";
 import { RootState, AppDispatch } from "../../../store";
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const PortfolioList: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { portfolios, loading } = useSelector((state: RootState) => state.portfolios);
+  const {  all, loading } = useSelector((state: RootState) => state.portfolios);
 
   useEffect(() => {
-    dispatch(fetchPortfolios());
+    dispatch(getAllPortfolios());
   }, [dispatch]);
 
   return (
@@ -27,7 +27,7 @@ const PortfolioList: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {portfolios.map((portfolio) => (
+            {all.map((portfolio) => (
               <tr key={portfolio.id}>
                 <td>{portfolio.title}</td>
                 <td>{portfolio.technologies.join(", ")}</td>

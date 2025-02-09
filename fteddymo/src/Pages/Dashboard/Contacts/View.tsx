@@ -1,19 +1,10 @@
 import React from "react";
 import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
 import { Link } from "react-router-dom";
-
-interface Contact {
-    id: number;
-    name: string;
-    email: string;
-    subject: string;
-    message: string;
-    state: string;
-    created_at: string;
-}
+import { ContactType } from "../../../Types/global";
 
 interface Props {
-    contact: Contact;
+    contact: ContactType;
 }
 
 const View: React.FC<Props> = ({ contact }) => {

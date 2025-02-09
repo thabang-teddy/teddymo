@@ -1,28 +1,121 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../Helpers/axiosInstance";
-import { Portfolio } from "../../Types/portfolio";
 import { PORTFOLIO_ENDPOINTS } from "../../Helpers/endpoints";
+import {
+  createPortfolioSuccess,
+  deletePortfolioSuccess,
+  portfoliosSuccess,
+  UpdatePortfolioSuccess,
+} from "./Reducer";
+import { PortfolioType } from "../../Types/global";
 
 // Fetch all portfolios
-export const fetchPortfolios = createAsyncThunk("portfolios/fetchAll", async () => {
-  const response = await API.get<Portfolio[]>(PORTFOLIO_ENDPOINTS.LIST);
-  return response.data;
-});
+export const getPortfolios = () => async (dispatch: any) => {
+  try {
+    const response = await API.get<{
+      success: boolean;
+      portfolios: PortfolioType[];
+    }>(PORTFOLIO_ENDPOINTS.PUBLIC_LIST);
+
+    if (response != null && response.data != null) {
+      let results = response.data;
+      if (results.success) {
+        dispatch(portfoliosSuccess(results.portfolios));
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const getAllPortfolios = () => async (dispatch: any) => {
+  try {
+    const response = await API.get<{
+      success: boolean;
+      portfolios: PortfolioType[];
+    }>(PORTFOLIO_ENDPOINTS.LIST);
+
+    if (response != null && response.data != null) {
+      let results = response.data;
+      if (results.success) {
+        dispatch(portfoliosSuccess(results.portfolios));
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 // Create new portfolio
-export const createPortfolio = createAsyncThunk("portfolios/create", async (portfolio: Omit<Portfolio, "id">) => {
-  const response = await API.post<Portfolio>(PORTFOLIO_ENDPOINTS.CREATE, portfolio);
-  return response.data;
-});
+export const createPortfolio =
+  (portfolio: Omit<PortfolioType, "id">) => async (dispatch: any) => {
+    try {
+      const response = await API.post<{
+        success: boolean;
+        portfolio: PortfolioType;
+        errors: string[];
+      }>(PORTFOLIO_ENDPOINTS.CREATE, portfolio);
+      if (response != null && response.data != null) {
+        let results = response.data;
+        if (results.success) {
+          dispatch(createPortfolioSuccess(results.portfolio));
+          return results;
+        } else {
+          return results;
+        }
+      }
+    } catch (error) {
+      console.log(error);
+
+      return null;
+    }
+  };
 
 // Update portfolio
-export const updatePortfolio = createAsyncThunk("portfolios/update", async ({ id, data }: { id: string; data: Partial<Portfolio> }) => {
-  const response = await API.put<Portfolio>(PORTFOLIO_ENDPOINTS.UPDATE(id), data);
-  return response.data;
-});
+export const updatePortfolio =
+  ({ id, portfolio }: { id: string; portfolio: Partial<PortfolioType> }) =>
+  async (dispatch: any) => {
+    try {
+      const response = await API.post<{
+        success: boolean;
+        portfolio: PortfolioType;
+        errors: string[];
+      }>(PORTFOLIO_ENDPOINTS.UPDATE(id), portfolio);
+      if (response != null && response.data != null) {
+        let results = response.data;
+        if (results.success) {
+          dispatch(UpdatePortfolioSuccess(results.portfolio));
+          return results;
+        } else {
+          return results;
+        }
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
 
 // Delete portfolio
-export const deletePortfolio = createAsyncThunk("portfolios/delete", async (id: string) => {
-  await API.delete(PORTFOLIO_ENDPOINTS.DELETE(id));
-  return id;
-});
+export const deletePortfolio = (id: string) => async (dispatch: any) => {
+  try {
+    const response = await API.delete<{
+      success: boolean;
+      errors: string[];
+    }>(PORTFOLIO_ENDPOINTS.DELETE(id));
+    if (response != null && response.data != null) {
+      let results = response.data;
+      if (results.success) {
+        dispatch(deletePortfolioSuccess(id));
+        return results;
+      } else {
+        return results;
+      }
+    } else {
+      return null;
+    }
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

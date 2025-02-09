@@ -12,6 +12,8 @@ Route::get('/', function (Request $request) {
 });
 
 Route::get('/portfolios/get', [PortfoliosController::class, 'get']);
+Route::get('/experiences/get', [ExperiencesController::class, 'get']);
+Route::post('/contacts/send', [ContactsController::class, 'store']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
@@ -36,7 +38,6 @@ Route::middleware('auth:sanctum')->group(function () {
     // Contact API Routes
     Route::prefix('contacts')->group(function () {
         Route::get('/', [ContactsController::class, 'index']);
-        Route::post('/', [ContactsController::class, 'store']);
         Route::get('/{contact}', [ContactsController::class, 'show']);
         Route::delete('/{contact}', [ContactsController::class, 'destroy']);
     });

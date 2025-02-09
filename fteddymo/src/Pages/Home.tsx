@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
-import BlankMainLayout from "../Layouts/BlankMainLayout";
+import MainLayout from "../Layouts/MainLayout";
 
 import profile from "../Assets/profile.jpg";
 
 
 export default function Home() {
 	return (
-		<BlankMainLayout title="Home">
+		<MainLayout title="Home">
 			<div className="container w-100 vh-100 d-flex justify-content-around">
 				<div
 					className="row m-auto w-100 vh-100 justify-content-evenly"
@@ -60,6 +60,6 @@ export default function Home() {
 					</div>
 				</div>
 			</div>
-		</BlankMainLayout>
+		</MainLayout>
 	);
 }

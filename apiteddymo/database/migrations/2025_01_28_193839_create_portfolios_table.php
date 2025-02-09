@@ -19,6 +19,7 @@ return new class extends Migration
             $table->json('technologies');
             $table->string('link');
             $table->string('imageUrl');
+            $table->boolean('is_active')->default(false);
             $table->boolean('is_deleted')->default(false);
             $table->timestamps();
         });

@@ -5,7 +5,7 @@ interface LayoutProps {
 	children: React.ReactNode; // Content to render inside the layout
 	showNavbar?: boolean; // Show or hide the navbar
 }
-export interface User {
+export interface UserType {
 	id: number;
 	name: string;
 	email: string;
@@ -19,7 +19,7 @@ export interface PortfolioCreateType {
 	link: string;
 	imageUrl: string;
 }
-export interface Portfolio {
+export interface PortfolioType {
 	id: string;
 	title: string;
 	summary: string;
@@ -39,8 +39,10 @@ export interface ResponsibilityType {
 export interface ExperienceType {
 	id: string;
 	title: string;
+	jobtitle: string;
+	company: string;
+	duration: string;
 	description: string;
-	technologies: string[];
 	link: string;
 	imageUrl: string;
 	responsibilities?: ResponsibilityType[];
@@ -53,4 +55,14 @@ export interface ExperienceCreateType {
 	link: string;
 	imageUrl: string;
 	responsibilities?: Responsibility[];
+}
+
+interface ContactType {
+    id: number;
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+    state: string;
+    created_at: string;
 }

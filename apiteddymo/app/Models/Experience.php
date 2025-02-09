@@ -10,7 +10,7 @@ class Experience extends Model
     use HasUuids;
     
     protected $fillable = [
-        'id', 'title', 'description', 'technologies', 'link', 'imageUrl','is_deleted'
+        'id', 'title', 'jobtitle', 'company', 'duration', 'description', 'link','is_deleted'
     ];
 
     protected $casts = [
