@@ -3,16 +3,16 @@ import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { updatePortfolio } from "../../../slices/Portfolios/Thunk";
 import API from "../../../Helpers/axiosInstance";
-import { Portfolio } from "../../../Types/portfolio";
 import { PORTFOLIO_ENDPOINTS } from "../../../Helpers/endpoints";
 import { AppDispatch } from "../../../store";
+import { PortfolioType } from "../../../Types/global";
 
 const PortfolioEdit: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const [form, setForm] = useState<Portfolio>({
+  const [form, setForm] = useState<PortfolioType>({
     id: "",
     title: "",
     summary: "",
@@ -24,7 +24,7 @@ const PortfolioEdit: React.FC = () => {
 
   useEffect(() => {
     const fetchPortfolio = async () => {
-      const response = await API.get<Portfolio>(PORTFOLIO_ENDPOINTS.VIEW(id!));
+      const response = await API.get<PortfolioType>(PORTFOLIO_ENDPOINTS.VIEW(id!));
       setForm(response.data);
     };
     fetchPortfolio();
@@ -36,7 +36,7 @@ const PortfolioEdit: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    await dispatch(updatePortfolio({ id: form.id, data: { ...form, technologies: form.technologies } }));
+    await dispatch(updatePortfolio({ id: form.id, portfolio: { ...form, technologies: form.technologies } }));
     navigate("/portfolios");
   };
 

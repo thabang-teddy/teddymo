@@ -55,4 +55,21 @@ class ContactsController extends Controller
 
         return response()->json(['message' => 'Contact deleted successfully.'], 200);
     }
+
+    public function websiteContact(Request $request): JsonResponse
+    {
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string|max:500',
+        ]);
+
+        $contact = Contact::create($validated);
+
+        // return response()->json($contact, 201);
+        return response()->json(['success' => true, 'errors' => []], 200);
+    }
+
 }

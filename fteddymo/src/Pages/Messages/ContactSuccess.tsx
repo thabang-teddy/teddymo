@@ -1,6 +1,7 @@
 
 import { Link } from "react-router-dom";
 import BlankMainLayout from "../../Layouts/BlankMainLayout";
+import profile from "../../Assets/profile.jpg";
 
 const ContactSuccess = () => {
     return (
@@ -15,7 +16,7 @@ const ContactSuccess = () => {
 							<div className="col-12">
 								<div className="fw-normal">
                                     <h1>Thank You!</h1>
-                                    <p>Your message has been successfully submitted. We will get back to you soon.</p>
+                                    <p>Your message has been successfully submitted. I will get back to you as soon as I can.</p>
                                 </div>
 								<Link className="btn btn-secondary" to="/">
                                     Go Back to Home
@@ -25,7 +26,7 @@ const ContactSuccess = () => {
 					</div>
 					<div className="col-auto d-flex align-items-center">
 						<img
-							src="/imgs/profile.jpg"
+							src={profile}
 							className="rounded-circle w-100"
 							alt="Logichog logo"
 							style={{ height: 300 }}

@@ -5,29 +5,27 @@ import {
   contactsSuccess,
   UpdateContactSuccess,
 } from "./Reducer";
-import { ContactType } from "../../Types/global";
+import { ContactType, SendContactType } from "../../Types/global";
 
 // send message
-export const SendContact = () => async (dispatch: any) => {
+export const SendContact = (contact : SendContactType) => async (dispatch: any) => {
   try {
-    const response = await API.get<{
+    const response = await API.post<{
       success: boolean;
-      contacts: ContactType[];
-    }>(CONTACT_ENDPOINTS.PUBLIC_SEND);
+      errors: string[];
+    }>(CONTACT_ENDPOINTS.PUBLIC_SEND, contact);
 
     if (response != null && response.data != null) {
       let results = response.data;
-      if (results.success) {
-        dispatch(contactsSuccess(results.contacts));
-        return true;
-      }
+      return results;
     }
-    return false;
+    return null;
   } catch (error) {
     console.log(error);
-    return false;
+    return null;
   }
 };
+
 // Fetch all contacts
 export const getAllContacts = () => async (dispatch: any) => {
   try {

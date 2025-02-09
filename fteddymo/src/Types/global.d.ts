@@ -66,3 +66,10 @@ interface ContactType {
     state: string;
     created_at: string;
 }
+
+interface SendContactType {
+    name: string;
+    email: string;
+    subject: string;
+    message: string;
+}
