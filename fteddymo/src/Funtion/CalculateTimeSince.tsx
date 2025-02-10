@@ -16,7 +16,7 @@ export const CalculateTimeSince = (dateString: String, yearOnly: boolean = false
     }
 
     if (days < 0) {
-      const previousMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+      // const previousMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
       adjustedMonths -= 1;
     }
 

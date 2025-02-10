@@ -1,36 +1,40 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Transition } from '@headlessui/react';
-import { Link, useForm, usePage } from '@inertiajs/react';
+// import InputError from '@/Components/InputError';
+// import InputLabel from '@/Components/InputLabel';
+// import PrimaryButton from '@/Components/PrimaryButton';
+// import TextInput from '@/Components/TextInput';
+// import { Transition } from '@headlessui/react';
+// import { Link, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 
-export default function UpdateProfileInformation({
-    mustVerifyEmail,
-    status,
-    className = '',
-}: {
-    mustVerifyEmail: boolean;
-    status?: string;
-    className?: string;
-}) {
-    const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } =
-        useForm({
-            name: user.name,
-            email: user.email,
-        });
+const UpdateProfileInformation = () => {
+
+// export default function UpdateProfileInformation({
+//     mustVerifyEmail,
+//     status,
+//     className = '',
+// }: {
+//     mustVerifyEmail: boolean;
+//     status?: string;
+//     className?: string;
+// }) {
+    // const user = usePage().props.auth.user;
+
+    // const { data, setData, patch, errors, processing, recentlySuccessful } =
+    //     useForm({
+    //         name: user.name,
+    //         email: user.email,
+    //     });
 
     const submit: FormEventHandler = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        // patch(route('profile.update'));
     };
 
     return (
-        <section className={className}>
+        <section className="w-100">
+        {/* <section className={className}> */}
             <header>
                 <h2 className="h5 fw-bold text-dark">
                     Profile Information
@@ -39,7 +43,7 @@ export default function UpdateProfileInformation({
                     Update your account's profile information and email address.
                 </p>
             </header>
-
+{/* 
             <form onSubmit={submit} className="mt-4">
                 <div className="mb-3">
                     <InputLabel htmlFor="name" value="Name" />
@@ -108,7 +112,9 @@ export default function UpdateProfileInformation({
                         <p className="small text-muted">Saved.</p>
                     </Transition>
                 </div>
-            </form>
+            </form> */}
         </section>
     );
 }
+
+export default UpdateProfileInformation;

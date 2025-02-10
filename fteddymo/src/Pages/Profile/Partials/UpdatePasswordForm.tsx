@@ -1,55 +1,57 @@
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import PrimaryButton from '@/Components/PrimaryButton';
-import TextInput from '@/Components/TextInput';
-import { Transition } from '@headlessui/react';
-import { useForm } from '@inertiajs/react';
+// import InputError from '@/Components/InputError';
+// import InputLabel from '@/Components/InputLabel';
+// import PrimaryButton from '@/Components/PrimaryButton';
+// import TextInput from '@/Components/TextInput';
+// import { Transition } from '@headlessui/react';
+// import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef } from 'react';
 
-export default function UpdatePasswordForm({
-    className = '',
-}: {
-    className?: string;
-}) {
+const UpdatePasswordForm = () => {
+// export default function UpdatePasswordForm({
+//     className = '',
+// }: {
+//     className?: string;
+// }) {
     const passwordInput = useRef<HTMLInputElement>(null);
     const currentPasswordInput = useRef<HTMLInputElement>(null);
 
-    const {
-        data,
-        setData,
-        errors,
-        put,
-        reset,
-        processing,
-        recentlySuccessful,
-    } = useForm({
-        current_password: '',
-        password: '',
-        password_confirmation: '',
-    });
+    // const {
+    //     data,
+    //     setData,
+    //     errors,
+    //     put,
+    //     reset,
+    //     processing,
+    //     recentlySuccessful,
+    // } = useForm({
+    //     current_password: '',
+    //     password: '',
+    //     password_confirmation: '',
+    // });
 
     const updatePassword: FormEventHandler = (e) => {
         e.preventDefault();
 
-        put(route('password.update'), {
-            preserveScroll: true,
-            onSuccess: () => reset(),
-            onError: (errors) => {
-                if (errors.password) {
-                    reset('password', 'password_confirmation');
-                    passwordInput.current?.focus();
-                }
+        // put(route('password.update'), {
+        //     preserveScroll: true,
+        //     onSuccess: () => reset(),
+        //     onError: (errors) => {
+        //         if (errors.password) {
+        //             reset('password', 'password_confirmation');
+        //             passwordInput.current?.focus();
+        //         }
 
-                if (errors.current_password) {
-                    reset('current_password');
-                    currentPasswordInput.current?.focus();
-                }
-            },
-        });
+        //         if (errors.current_password) {
+        //             reset('current_password');
+        //             currentPasswordInput.current?.focus();
+        //         }
+        //     },
+        // });
     };
 
     return (
-        <section className={className}>
+        <section className="w-100">
+        {/* <section className={className}> */}
             <header>
                 <h2 className="h5 fw-bold text-dark">Update Password</h2>
                 <p className="small text-muted mt-2">
@@ -57,7 +59,7 @@ export default function UpdatePasswordForm({
                 </p>
             </header>
 
-            <form onSubmit={updatePassword} className="mt-4">
+            {/* <form onSubmit={updatePassword} className="mt-4">
                 <div className="mb-3">
                     <InputLabel htmlFor="current_password" value="Current Password" />
 
@@ -121,7 +123,8 @@ export default function UpdatePasswordForm({
                         <p className="small text-muted">Saved.</p>
                     </Transition>
                 </div>
-            </form>
+            </form> */}
         </section>
     );
 }
+export default UpdatePasswordForm;

@@ -1,31 +1,27 @@
-import DangerButton from '@/Components/DangerButton';
-import InputError from '@/Components/InputError';
-import InputLabel from '@/Components/InputLabel';
-import Modal from '@/Components/Modal';
-import SecondaryButton from '@/Components/SecondaryButton';
-import TextInput from '@/Components/TextInput';
-import { useForm } from '@inertiajs/react';
+// import DangerButton from '@/Components/DangerButton';
+// import InputError from '@/Components/InputError';
+// import InputLabel from '@/Components/InputLabel';
+// import Modal from '@/Components/Modal';
+// import SecondaryButton from '@/Components/SecondaryButton';
+// import TextInput from '@/Components/TextInput';
+// import { useForm } from '@inertiajs/react';
 import { FormEventHandler, useRef, useState } from 'react';
 
-export default function DeleteUserForm({
-    className = '',
-}: {
-    className?: string;
-}) {
+const DeleteUserForm = () => {
     const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
     const passwordInput = useRef<HTMLInputElement>(null);
 
-    const {
-        data,
-        setData,
-        delete: destroy,
-        processing,
-        reset,
-        errors,
-        clearErrors,
-    } = useForm({
-        password: '',
-    });
+    // const {
+    //     data,
+    //     setData,
+    //     delete: destroy,
+    //     processing,
+    //     reset,
+    //     errors,
+    //     clearErrors,
+    // } = useForm({
+    //     password: '',
+    // });
 
     const confirmUserDeletion = () => {
         setConfirmingUserDeletion(true);
@@ -34,23 +30,23 @@ export default function DeleteUserForm({
     const deleteUser: FormEventHandler = (e) => {
         e.preventDefault();
 
-        destroy(route('profile.destroy'), {
-            preserveScroll: true,
-            onSuccess: () => closeModal(),
-            onError: () => passwordInput.current?.focus(),
-            onFinish: () => reset(),
-        });
+        // destroy(route('profile.destroy'), {
+        //     preserveScroll: true,
+        //     onSuccess: () => closeModal(),
+        //     onError: () => passwordInput.current?.focus(),
+        //     onFinish: () => reset(),
+        // });
     };
 
     const closeModal = () => {
-        setConfirmingUserDeletion(false);
+        // setConfirmingUserDeletion(false);
 
-        clearErrors();
-        reset();
+        // clearErrors();
+        // reset();
     };
 
     return (
-        <section className={`mb-4 ${className}`}>
+        <section className="mb-4 w-100">
             <header>
                 <h2 className="h5 fw-bold text-dark">Delete Account</h2>
 
@@ -62,9 +58,9 @@ export default function DeleteUserForm({
                 </p>
             </header>
 
-            <DangerButton onClick={confirmUserDeletion}>Delete Account</DangerButton>
+            {/* <DangerButton onClick={confirmUserDeletion}>Delete Account</DangerButton> */}
 
-            <Modal show={confirmingUserDeletion} onClose={closeModal}>
+            {/* <Modal show={confirmingUserDeletion} onClose={closeModal}>
                 <form onSubmit={deleteUser} className="p-4">
                     <h2 className="h5 fw-bold text-dark">
                         Are you sure you want to delete your account?
@@ -89,8 +85,8 @@ export default function DeleteUserForm({
                             type="password"
                             name="password"
                             ref={passwordInput}
-                            value={data.password}
-                            onChange={(e) => setData('password', e.target.value)}
+                            // value={data.password}
+                            // onChange={(e) => setData('password', e.target.value)}
                             className="form-control"
                             isFocused
                             placeholder="Password"
@@ -107,7 +103,8 @@ export default function DeleteUserForm({
                         </DangerButton>
                     </div>
                 </form>
-            </Modal>
+            </Modal> */}
         </section>
     );
 }
+export default DeleteUserForm;

@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../../Helpers/axiosInstance";
-import { Portfolio } from "../../../Types/portfolio";
+// import { Portfolio } from "../../../Types/portfolio";
 import { PORTFOLIO_ENDPOINTS } from "../../../Helpers/endpoints";
+import { PortfolioType } from "../../../Types/global";
 
 const PortfolioView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const [portfolio, setPortfolio] = useState<Portfolio | null>(null);
+  const [portfolio, setPortfolio] = useState<PortfolioType | null>(null);
 
   useEffect(() => {
     const fetchPortfolio = async () => {
-      const response = await API.get<Portfolio>(PORTFOLIO_ENDPOINTS.VIEW(id!));
+      const response = await API.get<PortfolioType>(PORTFOLIO_ENDPOINTS.VIEW(id!));
       setPortfolio(response.data);
     };
     fetchPortfolio();
