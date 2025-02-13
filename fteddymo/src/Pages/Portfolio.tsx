@@ -4,6 +4,7 @@ import MainLayout from "../Layouts/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { getPortfolios } from "../slices/Portfolios/Thunk";
+import { PortfolioType } from "../Types/global";
 
 export default function Portfolio() {
 	const dispatch = useDispatch<any>();
@@ -23,7 +24,7 @@ export default function Portfolio() {
 					<div className="col-md-12">
 						<h1 className="mb-4">Portfolio</h1>
 						<div className="row">
-							{portfolios.map((project) => (
+							{portfolios.map((project : PortfolioType) => (
 								<div key={project.id} className="col-md-4 mb-4">
 									<div className="card h-100">
 										<div className="card-body">

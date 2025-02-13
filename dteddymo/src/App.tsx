@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import { publicRoutes } from "./Routes/Allroutes";
+import { publicRoutes, authProtectedRoutes } from "./Routes/Allroutes";
+import AuthProtected from "./Routes/AuthProtected";
+import AuthenticatedLayout from "./Layouts/AuthenticatedLayout";
 import BlankMainLayout from "./Layouts/BlankMainLayout";
 
 const App: React.FC = () => {
@@ -16,6 +18,18 @@ const App: React.FC = () => {
         />
       ))}
 
+      {authProtectedRoutes.map(({ path, component }) => (
+        <Route
+          key={path}
+          path={path}
+          element={
+            <AuthProtected>
+              <AuthenticatedLayout>{component}</AuthenticatedLayout>
+            </AuthProtected>
+          }
+        />
+      ))}
+      
       {/* For error or unknown routes */}
       <Route
         path="*"

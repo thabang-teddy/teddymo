@@ -3,6 +3,7 @@ import MainLayout from "../Layouts/MainLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import { getExperiences } from "../slices/Experiences/Thunk";
+import { ExperienceType, ResponsibilityType } from "../Types/global";
 
 export default function Experience() {
   const dispatch = useDispatch<any>();
@@ -21,40 +22,51 @@ export default function Experience() {
         <div className="row justify-content-center my-5">
           <div className="col-md-12">
             <h1 className="h3 mb-4">Work Experience</h1>
-            {experiences.map((experience) => (
+            {experiences.map((experience:ExperienceType) => (
               <div className="card" key={experience.id}>
                 <div className="card-body">
                   <div className="mb-4">
                     <h2 className="h4">{experience.jobtitle}</h2>
                     <p className="mb-1 fw-bold">{experience.company}</p>
-                    <p className="text-muted">
-                      {experience.duration}
-                    </p>
-                    <div>{experience.description}</div>
+                    <p className="text-muted">{experience.duration}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: experience.description,
+                      }}
+                    />
                   </div>
                   <h2 className="mb-4">Responsibilities</h2>
                   <div className="row justify-content-center">
                     <div className="col-md-12">
                       <div className="row">
-                        {experience.responsibilities?.map((responsibility) => (
-                          <div key={responsibility.id} className="col-md-4 mb-4">
+                        {experience.responsibilities?.map((responsibility:ResponsibilityType) => (
+                          <div
+                            key={responsibility.id}
+                            className="col-md-4 mb-4"
+                          >
                             <div className="card h-100">
                               <div className="card-body">
                                 <h2 className="card-title h5">
                                   {responsibility.title}
                                 </h2>
-                                <p className="card-text">
-                                  {responsibility.description}
-                                </p>
+                                <div className="card-text">
+                                  <div
+                                    dangerouslySetInnerHTML={{
+                                      __html: responsibility.description,
+                                    }}
+                                  />
+                                </div>
                                 <div className="mt-3">
-                                  {responsibility.technologies.map((tech, index) => (
-                                    <span
-                                      key={index}
-                                      className="badge bg-secondary me-1"
-                                    >
-                                      {tech}
-                                    </span>
-                                  ))}
+                                  {responsibility.technologies.map(
+                                    (tech, index) => (
+                                      <span
+                                        key={index}
+                                        className="badge bg-secondary me-1"
+                                      >
+                                        {tech}
+                                      </span>
+                                    )
+                                  )}
                                 </div>
                               </div>
                             </div>

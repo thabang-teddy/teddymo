@@ -1,6 +1,6 @@
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 
-export default function Index() {
+export default function Dashboard() {
     return (
         <AuthenticatedLayout header="Dashboard" title="Dashboard">
 

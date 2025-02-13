@@ -5,9 +5,8 @@ import { LayoutProps } from '../Types/global';
 const MainLayout: React.FC<LayoutProps> = ({header, title, children, showNavbar = true }) => {
 
   return (
-		<div className="d-flex flex-column min-vh-100 bg-light" title={title} data-header={header}>
-			{
-			showNavbar ? <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+		<div className="d-flex flex-column min-vh-100 bg-light">
+			<nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
 				<div className="container">
 					<Link to="/" className="navbar-brand fw-bold fs-4">
 						Thabang Teddy Morwasetla
@@ -42,8 +41,7 @@ const MainLayout: React.FC<LayoutProps> = ({header, title, children, showNavbar 
 						</ul>
 					</div>
 				</div>
-			</nav> :""
-			}
+			</nav>
 
 			<main className="flex-grow-1">{children}</main>
 
