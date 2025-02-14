@@ -1,20 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { publicRoutes, authProtectedRoutes } from "./Routes/Allroutes";
 import AuthProtected from "./Routes/AuthProtected";
 import AuthenticatedLayout from "./Layouts/AuthenticatedLayout";
 import BlankMainLayout from "./Layouts/BlankMainLayout";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "./store";
+import { checklogin } from "./slices/Auth/Thunk";
+import NonAuth from "./Routes/NonAuth";
 
 const App: React.FC = () => {
   // const { user } = useSelector((state: RootState) => state.auth);
-
+  const dispatch = useDispatch<AppDispatch>();
+  
+    useEffect(() => {
+      dispatch(checklogin());
+    }, []);
+  
   return (
     <Routes>
       {publicRoutes.map(({ path, component }) => (
         <Route
           key={path}
           path={path}
-          element={<BlankMainLayout>{component}</BlankMainLayout>} // Use NonAuthLayout for public pages
+          element={<NonAuth>{component}</NonAuth>} // Use NonAuthLayout for public pages
         />
       ))}
 
@@ -23,9 +32,7 @@ const App: React.FC = () => {
           key={path}
           path={path}
           element={
-            <AuthProtected>
-              <AuthenticatedLayout>{component}</AuthenticatedLayout>
-            </AuthProtected>
+            <AuthProtected>{component}</AuthProtected>
           }
         />
       ))}

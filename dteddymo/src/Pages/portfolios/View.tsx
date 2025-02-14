@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import API from "../../../Helpers/axiosInstance";
+import API from "../../Helpers/axiosInstance";
 // import { Portfolio } from "../../../Types/portfolio";
-import { PORTFOLIO_ENDPOINTS } from "../../../Helpers/endpoints";
-import { PortfolioType } from "../../../Types/global";
+import { PORTFOLIO_ENDPOINTS } from "../../Helpers/endpoints";
+import { PortfolioType } from "../../Types/global";
 
 const PortfolioView: React.FC = () => {
   const { id } = useParams<{ id: string }>();

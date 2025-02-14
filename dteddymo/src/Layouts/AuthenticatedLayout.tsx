@@ -38,9 +38,9 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
               <ul className="navbar-nav ms-auto">
                 <li className="nav-item">
                   <Link
-                    to={"/dashboard/index"}
+                    to={"/"}
                     className={`nav-link ${
-                      currentUrl.includes("/dashboard/index") ? "active" : ""
+                      currentUrl == "/" ? "active" : ""
                     }`}
                   >
                     Dashboard
@@ -48,9 +48,9 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                 </li>
                 <li className="nav-item">
                   <Link
-                    to={"/dashboard/contacts/index"}
+                    to={"/contacts"}
                     className={`nav-link ${
-                      currentUrl.includes("/dashboard/contacts/index")
+                      currentUrl.includes("/contacts")
                         ? "active"
                         : ""
                     }`}
@@ -60,7 +60,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                 </li>
                 <li className="nav-item">
                   <Link
-                    to={"experiences.index"}
+                    to={"/experiences"}
                     className={`nav-link ${
                       currentUrl.includes("/experiences") ? "active" : ""
                     }`}
@@ -70,7 +70,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                 </li>
                 <li className="nav-item">
                   <Link
-                    to={"portfolios.index"}
+                    to={"/portfolios"}
                     className={`nav-link ${
                       currentUrl.includes("/portfolios") ? "active" : ""
                     }`}
@@ -80,7 +80,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                 </li>
                 <li className="nav-item">
                   <Link
-                    to={"profile.edit"}
+                    to={"/profile"}
                     className={`nav-link ${
                       currentUrl.includes("/profile") ? "active" : ""
                     }`}

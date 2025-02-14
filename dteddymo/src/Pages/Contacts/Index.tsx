@@ -1,5 +1,5 @@
 import React from "react";
-import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
+import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import { Link } from "react-router-dom";
 
 interface Contact {

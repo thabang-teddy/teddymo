@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { updatePortfolio } from "../../../slices/Portfolios/Thunk";
-import API from "../../../Helpers/axiosInstance";
-import { PORTFOLIO_ENDPOINTS } from "../../../Helpers/endpoints";
-import { AppDispatch } from "../../../store";
-import { PortfolioType } from "../../../Types/global";
+import { updatePortfolio } from "../../slices/Portfolios/Thunk";
+import API from "../../Helpers/axiosInstance";
+import { PORTFOLIO_ENDPOINTS } from "../../Helpers/endpoints";
+import { AppDispatch } from "../../store";
+import { PortfolioType } from "../../Types/global";
 
 const PortfolioEdit: React.FC = () => {
   const { id } = useParams<{ id: string }>();

@@ -3,17 +3,17 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
-const AuthProtected: React.FC<{ children: JSX.Element }> = ({ children }) => {
+const NonAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const { user } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
-      navigate("/login");
+    if (user) {
+      navigate("/");
     }
   }, [user]);
 
   return children;
 };
 
-export default AuthProtected;
+export default NonAuth;

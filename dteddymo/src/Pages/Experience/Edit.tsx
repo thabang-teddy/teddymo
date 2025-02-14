@@ -1,24 +1,23 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { ExperienceCreateType } from "../../../Types/global";
+import { ExperienceType } from "../../Types/global";
 import { useDispatch } from "react-redux";
-import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
-import { createExperience } from "../../../slices/Experiences/Thunk";
-import { AppDispatch } from "../../../store";
+import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
+import { updateExperience } from "../../slices/Experiences/Thunk";
+import { AppDispatch } from "../../store";
 
-const ExperienceCreate: React.FC = () => {
-	  const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
+const ExperienceEdit: React.FC<{ experience?: ExperienceType }> = ({ experience }) => {
+    const dispatch = useDispatch<AppDispatch>();
 
-    const [formData, setFormData] = useState<ExperienceCreateType>({
-        title: "",
-        description: "",
-        technologies: [],
-        link: "",
-        imageUrl: "",
+    const [formData, setFormData] = useState<ExperienceType>({
+		id: experience?.id || "",
+        title: experience?.title || "",
+        description: experience?.description || "",
+        technologies: experience?.technologies || [],
+        link: experience?.link || "",
+        imageUrl: experience?.imageUrl || "",
     });
 
-    const [errors, setErrors] = useState<Partial<ExperienceCreateType>>({});
+    const [errors, setErrors] = useState<Partial<ExperienceType>>({});
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { id, value } = e.target;
@@ -30,24 +29,11 @@ const ExperienceCreate: React.FC = () => {
         setFormData({ ...formData, technologies: values });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        dispatch(createExperience(formData))
-            .then((data : any) => {
-                if (data != null && data.payload != null) {
-                    navigate("/dashboard/experiences");
-                } else {
-                    setErrors((prevErrors) => ({...prevErrors, formMain: "Could not create experience"}));
-                }
-            })
-            .catch(() => setErrors((prevErrors) => ({...prevErrors, formMain: "Could not create experience"})));
-    };
-
     return (
         <AuthenticatedLayout>
             <div className="container">
-                <h2 className="h4 font-weight-bold text-dark">Experience Create</h2>
-                <form onSubmit={handleSubmit}>
+                <h2 className="h4 font-weight-bold text-dark">Edit Experience</h2>
+                <form>
                     <div className="mb-3">
                         <label htmlFor="title" className="form-label">Title</label>
                         <input type="text" className="form-control" id="title" value={formData.title} onChange={handleChange} />
@@ -73,11 +59,11 @@ const ExperienceCreate: React.FC = () => {
                         <input type="text" className="form-control" id="imageUrl" value={formData.imageUrl} onChange={handleChange} />
                         {errors.imageUrl && <small className="text-danger">{errors.imageUrl}</small>}
                     </div>
-                    <button type="submit" className="btn btn-primary">Create</button>
+                    <button type="submit" className="btn btn-primary">Update</button>
                 </form>
             </div>
         </AuthenticatedLayout>
     );
 };
 
-export default ExperienceCreate;
+export default ExperienceEdit;

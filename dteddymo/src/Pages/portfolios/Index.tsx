@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPortfolios, deletePortfolio } from "../../../slices/Portfolios/Thunk";
-import { RootState, AppDispatch } from "../../../store";
+import { getAllPortfolios, deletePortfolio } from "../../slices/Portfolios/Thunk";
+import { RootState, AppDispatch } from "../../store";
 import { Table, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 

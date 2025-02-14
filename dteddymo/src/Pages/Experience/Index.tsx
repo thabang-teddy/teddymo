@@ -1,13 +1,22 @@
-import React from "react";
-import AuthenticatedLayout from "../../../Layouts/AuthenticatedLayout";
+import React, { useEffect, useState } from "react";
+import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import { Link } from "react-router-dom";
-import { ExperienceType } from "../../../Types/global";
+import { ExperienceType } from "../../Types/global";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { getAllExperiences } from "../../slices/Experiences/Thunk";
 
-interface Props {
-	experiences: ExperienceType[];
-}
-
-const ExperienceIndex: React.FC<Props> = ({ experiences }) => {
+const ExperienceList = () => {
+	const dispatch = useDispatch<AppDispatch>();
+	const {  all } = useSelector((state: RootState) => state.experiences);
+	const [experience, setExperience] = useState<ExperienceType>();
+	
+	useEffect(() => {
+		if (all.length > 1) {
+			dispatch(getAllExperiences());
+		}
+	}, [all]);
+	
 	return (
 		<AuthenticatedLayout header="Experience" title="Experience">
 			<div className="container">
@@ -18,7 +27,7 @@ const ExperienceIndex: React.FC<Props> = ({ experiences }) => {
 					Add New Experience
 				</Link>
 				<div className="row">
-					{experiences.map((experience) => (
+					{all.map((experience) => (
 						<div className="col-md-4 mb-3" key={experience.id}>
 							<div className="card">
 								<img
@@ -46,4 +55,4 @@ const ExperienceIndex: React.FC<Props> = ({ experiences }) => {
 	);
 };
 
-export default ExperienceIndex;
+export default ExperienceList;

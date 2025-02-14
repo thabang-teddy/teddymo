@@ -4,7 +4,6 @@ import { login, logout } from "./Thunk.ts";
 
 const initialState: AuthState = {
   user: null,
-  token: null,
   loading: false,
   error: null,
 };
@@ -12,28 +11,24 @@ const initialState: AuthState = {
 const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(login.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(login.fulfilled, (state, action: PayloadAction<{ user: User; token: string }>) => {
-        state.loading = false;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
-      })
-      .addCase(login.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message ?? "Login failed";
-      })
-      .addCase(logout.fulfilled, (state) => {
-        state.user = null;
-        state.token = null;
-      });
+  reducers:  {
+    loginSuccess(state, action) {
+      state.user = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    logoutUser(state, action) {
+      state.user = null;
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
+
+export const {
+  loginSuccess,
+  logoutUser
+} = authSlice.actions
 
 export default authSlice.reducer;
 

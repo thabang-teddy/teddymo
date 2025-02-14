@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { createPortfolio } from "../../../slices/Portfolios/Thunk";
-import { AppDispatch } from "../../../store";
+import { createPortfolio } from "../../slices/Portfolios/Thunk";
+import { AppDispatch } from "../../store";
 
 const PortfolioCreate: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();

@@ -17,7 +17,7 @@ const Login: React.FC = () => {
     dispatch(login({ email, password }))
       .then((data) => {
         if (data != null && data.payload != null) {
-            navigate("/portfolios");
+            navigate("/");
         }
         else
         {
