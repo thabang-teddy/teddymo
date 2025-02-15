@@ -26,11 +26,13 @@ const experienceSlice = createSlice({
       state.loading = false;
     },
     UpdateExperienceSuccess(state, action) {
-      state.all = [...state.all, action.payload];
+      state.all = state.all.map(item =>
+        item.id === action.payload.id ? { ...item, ...action.payload.data } : item
+      );
       state.loading = false;
     },
     deleteExperienceSuccess(state, action) {
-      state.all = [...state.all, action.payload];
+      state.all = state.all.filter(item => item.id !== action.payload);
       state.loading = false;
     }
   },

@@ -1,10 +1,7 @@
 import API from "../../Helpers/axiosInstance";
 import { CONTACT_ENDPOINTS } from "../../Helpers/endpoints";
-import {
-  deleteContactSuccess,
-  contactsSuccess,
-} from "./Reducer";
 import { ContactType } from "../../Types/global";
+import { contactsSuccess, deleteContactSuccess } from "./Reducer";
 
 // Fetch all contacts
 export const getAllContacts = () => async (dispatch: any) => {

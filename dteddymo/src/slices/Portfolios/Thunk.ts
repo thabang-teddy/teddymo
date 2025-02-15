@@ -9,23 +9,6 @@ import {
 import { PortfolioType } from "../../Types/global";
 
 // Fetch all portfolios
-export const getPortfolios = () => async (dispatch: any) => {
-  try {
-    const response = await API.get<{
-      success: boolean;
-      portfolios: PortfolioType[];
-    }>(PORTFOLIO_ENDPOINTS.PUBLIC_LIST);
-
-    if (response != null && response.data != null) {
-      let results = response.data;
-      if (results.success) {
-        dispatch(portfoliosSuccess(results.portfolios));
-      }
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
 export const getAllPortfolios = () => async (dispatch: any) => {
   try {
     const response = await API.get<{
@@ -74,7 +57,7 @@ export const updatePortfolio =
   ({ id, portfolio }: { id: string; portfolio: Partial<PortfolioType> }) =>
   async (dispatch: any) => {
     try {
-      const response = await API.post<{
+      const response = await API.put<{
         success: boolean;
         portfolio: PortfolioType;
         errors: string[];
@@ -82,11 +65,9 @@ export const updatePortfolio =
       if (response != null && response.data != null) {
         let results = response.data;
         if (results.success) {
-          dispatch(UpdatePortfolioSuccess(results.portfolio));
-          return results;
-        } else {
-          return results;
+          dispatch(UpdatePortfolioSuccess(portfolio));
         }
+        return results;
       } else {
         return null;
       }

@@ -73,3 +73,9 @@ interface SendContactType {
     subject: string;
     message: string;
 }
+
+interface AlertType {
+    id: string;
+    text: string;
+    alertType: string;
+}

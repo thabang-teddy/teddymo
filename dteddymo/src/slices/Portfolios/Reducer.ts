@@ -9,7 +9,7 @@ interface PortfolioState {
 
 const initialState: PortfolioState = {
   all: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -26,11 +26,13 @@ const portfolioSlice = createSlice({
       state.loading = false;
     },
     UpdatePortfolioSuccess(state, action) {
-      state.all = [...state.all, action.payload];
+      state.all = state.all.map(item =>
+        item.id === action.payload.id ? { ...item, ...action.payload } : item
+      );
       state.loading = false;
     },
     deletePortfolioSuccess(state, action) {
-      state.all = [...state.all, action.payload];
+      state.all = state.all.filter(item => item.id !== action.payload);
       state.loading = false;
     }
   },

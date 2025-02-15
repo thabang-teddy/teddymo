@@ -11,7 +11,8 @@ class PortfoliosController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(Portfolio::all());
+        // return response()->json(Portfolio::all());
+        return response()->json(['success' => true, 'portfolios' => Portfolio::all()], 200);
     }
 
     public function store(Request $request): JsonResponse
@@ -48,14 +49,15 @@ class PortfoliosController extends Controller
 
         $portfolio->update($validated);
 
-        return response()->json($portfolio);
+        // return response()->json($portfolio);
+        return response()->json(['success' => true], 200);
     }
 
     public function destroy(Portfolio $portfolio): JsonResponse
     {
         $portfolio->delete();
 
-        return response()->json(['message' => 'Portfolio deleted successfully.'], 200);
+        return response()->json(['success' => true, 'message' => 'Portfolio deleted successfully.'], 200);
     }
 
     public function get(): JsonResponse

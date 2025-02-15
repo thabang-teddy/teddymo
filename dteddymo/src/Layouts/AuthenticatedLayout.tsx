@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { LayoutProps } from "../Types/global";
 import { useEffect, useState } from "react";
+import AlertComponent from "../Components/AlertComponent";
 
 const AuthenticatedLayout: React.FC<LayoutProps> = ({
   header,
@@ -39,9 +40,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                 <li className="nav-item">
                   <Link
                     to={"/"}
-                    className={`nav-link ${
-                      currentUrl == "/" ? "active" : ""
-                    }`}
+                    className={`nav-link ${currentUrl == "/" ? "active" : ""}`}
                   >
                     Dashboard
                   </Link>
@@ -50,9 +49,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                   <Link
                     to={"/contacts"}
                     className={`nav-link ${
-                      currentUrl.includes("/contacts")
-                        ? "active"
-                        : ""
+                      currentUrl.includes("/contacts") ? "active" : ""
                     }`}
                   >
                     Contact
@@ -107,6 +104,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
       )}
 
       <main className="flex-grow-1">{children}</main>
+      <AlertComponent />
     </div>
   );
 };
