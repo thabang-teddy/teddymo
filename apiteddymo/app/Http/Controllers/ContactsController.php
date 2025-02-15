@@ -12,7 +12,8 @@ class ContactsController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(Contact::all());
+        // return response()->json(Contact::all());
+        return response()->json(['success' => true, 'contacts' => Contact::all()], 200);
     }
 
     public function store(Request $request): JsonResponse

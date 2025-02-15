@@ -10,14 +10,20 @@ import ExperienceList from "../Pages/Experience/Index.tsx";
 import ExperienceCreate from "../Pages/Experience/Create.tsx";
 import ExperienceEdit from "../Pages/Experience/Edit.tsx";
 import ExperienceView from "../Pages/Experience/View.tsx";
+import ContactList from "../Pages/Contacts/Index.tsx";
+import ContactView from "../Pages/Contacts/View.tsx";
 
-const publicRoutes = [
+const publicRoutes : any[] | null = [
+
+];
+
+const NonAuthRoutes : any[] | null = [
   { path: "/login", component: <Login /> },
   { path: "/logout", component: <Logout /> },
 
 ];
 
-const authProtectedRoutes = [
+const authProtectedRoutes : any[] | null = [
   { path: "/", component: <Dashboard /> },
   { path: "/portfolios", component: <PortfolioList /> },
   { path: "/portfolios/create", component: <PortfolioCreate /> },
@@ -28,6 +34,9 @@ const authProtectedRoutes = [
   { path: "/experiences/create", component: <ExperienceCreate /> },
   { path: "/experiences/edit/:id", component: <ExperienceEdit /> },
   { path: "/experiences/view/:id", component: <ExperienceView  /> },
+
+  { path: "/contacts", component: <ContactList /> },
+  { path: "/contacts/view/:id", component: <ContactView /> },
 ];
 
-export { publicRoutes, authProtectedRoutes };
+export { publicRoutes, authProtectedRoutes , NonAuthRoutes};

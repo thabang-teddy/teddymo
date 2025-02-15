@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { publicRoutes, authProtectedRoutes } from "./Routes/Allroutes";
+import { publicRoutes, authProtectedRoutes, NonAuthRoutes } from "./Routes/Allroutes";
 import AuthProtected from "./Routes/AuthProtected";
 import AuthenticatedLayout from "./Layouts/AuthenticatedLayout";
 import BlankMainLayout from "./Layouts/BlankMainLayout";
@@ -19,7 +19,15 @@ const App: React.FC = () => {
   
   return (
     <Routes>
-      {publicRoutes.map(({ path, component }) => (
+      {publicRoutes?.map(({ path, component }) => (
+        <Route
+          key={path}
+          path={path}
+          element={<NonAuth>{component}</NonAuth>} // Use NonAuthLayout for public pages
+        />
+      ))}
+      
+      {NonAuthRoutes?.map(({ path, component }) => (
         <Route
           key={path}
           path={path}
@@ -27,7 +35,7 @@ const App: React.FC = () => {
         />
       ))}
 
-      {authProtectedRoutes.map(({ path, component }) => (
+      {authProtectedRoutes?.map(({ path, component }) => (
         <Route
           key={path}
           path={path}

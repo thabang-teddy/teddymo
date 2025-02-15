@@ -4,11 +4,11 @@ import { useSelector } from "react-redux";
 import { RootState } from "../store";
 
 const AuthProtected: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const { user } = useSelector((state: RootState) => state.auth);
+  const { user , loading } = useSelector((state: RootState) => state.auth);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user) {
+    if (!user && !loading) {
       navigate("/login");
     }
   }, [user]);

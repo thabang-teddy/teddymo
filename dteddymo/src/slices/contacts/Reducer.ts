@@ -9,7 +9,7 @@ interface ContactState {
 
 const initialState: ContactState = {
   all: [],
-  loading: false,
+  loading: true,
   error: null,
 };
 
@@ -21,12 +21,8 @@ const contactSlice = createSlice({
       state.all = action.payload;
       state.loading = false;
     },
-    UpdateContactSuccess(state, action) {
-      state.all = [...state.all, action.payload];
-      state.loading = false;
-    },
     deleteContactSuccess(state, action) {
-      state.all = [...state.all, action.payload];
+      state.all = state.all.filter(item => item.id !== action.payload);
       state.loading = false;
     }
   },
@@ -34,7 +30,6 @@ const contactSlice = createSlice({
 
 export const {
   contactsSuccess,
-  UpdateContactSuccess,
   deleteContactSuccess
 } = contactSlice.actions
 

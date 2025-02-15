@@ -58,7 +58,7 @@ export interface ExperienceCreateType {
 }
 
 interface ContactType {
-    id: number;
+    id: string;
     name: string;
     email: string;
     subject: string;

@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../store";
+import { getAllContacts } from "../../slices/Contacts/Thunk";
 
-interface Contact {
-	id: number;
-	name: string;
-	email: string;
-	subject: string;
-	state: string;
-	created_at: string;
-}
-
-interface Props {
-	contacts: Contact[];
-}
-
-const Index: React.FC<Props> = ({ contacts }) => {
+const ContactList: React.FC = () => {
+	
+	const dispatch = useDispatch<AppDispatch>();
+	const {  all, loading } = useSelector((state: RootState) => state.contacts);
+  
+	useEffect(() => {
+		if (all == null || all.length < 1) {
+			dispatch(getAllContacts());
+		}
+	}, [all]);
+  
+	if (!all) return <p>Loading...</p>;
+  
 	return (
 		<AuthenticatedLayout header="Dashboard" title="Contact List">
 
@@ -34,7 +36,7 @@ const Index: React.FC<Props> = ({ contacts }) => {
 						</tr>
 					</thead>
 					<tbody>
-						{contacts.map((contact) => (
+						{all.map((contact) => (
 							<tr key={contact.id}>
 								<td>{contact.id}</td>
 								<td>{contact.name}</td>
@@ -48,7 +50,7 @@ const Index: React.FC<Props> = ({ contacts }) => {
 								</td>
 								<td>
 									<Link
-										to={`/dashboard/contacts/${contact.id}`}
+										to={`/contacts/view/${contact.id}`}
 										className="btn btn-primary btn-sm"
 									>
 										View
@@ -63,4 +65,4 @@ const Index: React.FC<Props> = ({ contacts }) => {
 	);
 };
 
-export default Index;
+export default ContactList;
