@@ -31,7 +31,7 @@ const PortfolioView: React.FC = () => {
   if (!loading && portfolio == null) navigate("/portfolios");
 
   return (
-    <AuthenticatedLayout header="Dashboard" title="View Portfolio">
+    <AuthenticatedLayout header="Dashboard > Portfolios > View" title="View Portfolio">
       <div className="container mt-5">
         <h1 className="mb-4"></h1>
         <div className="card">

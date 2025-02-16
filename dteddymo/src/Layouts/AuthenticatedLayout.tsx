@@ -104,7 +104,6 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
       )}
 
       <main className="flex-grow-1">{children}</main>
-      <AlertComponent />
     </div>
   );
 };

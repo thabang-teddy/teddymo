@@ -11,7 +11,8 @@ class ExperiencesController extends Controller
 {
     public function index(): JsonResponse
     {
-        return response()->json(Experience::all());
+        // return response()->json(Experience::all());
+        return response()->json(['success' => true, 'experiences' => Experience::all()], 200);
     }
 
     public function store(Request $request): JsonResponse
@@ -28,7 +29,7 @@ class ExperiencesController extends Controller
 
         $experience = Experience::create($validated);
 
-        return response()->json($experience, 201);
+        return response()->json(['success' => true], 200);
     }
 
     public function show(Experience $experience): JsonResponse
@@ -50,14 +51,15 @@ class ExperiencesController extends Controller
 
         $experience->update($validated);
 
-        return response()->json($experience);
+        // return response()->json($experience);
+        return response()->json(['success' => true], 200);
     }
 
     public function destroy(Experience $experience): JsonResponse
     {
         $experience->delete();
 
-        return response()->json(['message' => 'Experience deleted successfully.'], 200);
+        return response()->json(['success' => true, 'message' => 'Experience deleted successfully.'], 200);
     }
 
     public function get(): JsonResponse

@@ -1,7 +1,6 @@
 import API from "../../Helpers/axiosInstance";
 import { PORTFOLIO_ENDPOINTS } from "../../Helpers/endpoints";
 import {
-  createPortfolioSuccess,
   deletePortfolioSuccess,
   portfoliosSuccess,
   UpdatePortfolioSuccess,
@@ -39,7 +38,6 @@ export const createPortfolio =
       if (response != null && response.data != null) {
         let results = response.data;
         if (results.success) {
-          dispatch(createPortfolioSuccess(results.portfolio));
           return results;
         } else {
           return results;

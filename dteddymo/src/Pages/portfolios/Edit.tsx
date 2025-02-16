@@ -27,16 +27,6 @@ const PortfolioEdit: React.FC = () => {
     imageUrl: "",
   });
 
-  // useEffect(() => {
-  //   const fetchPortfolio = async () => {
-  //     const response = await API.get<PortfolioType>(
-  //       PORTFOLIO_ENDPOINTS.VIEW(id!)
-  //     );
-  //     setForm(response.data);
-  //   };
-  //   fetchPortfolio();
-  // }, [id]);
-
   useEffect(() => {
     if (all == null || all.length < 1) {
       dispatch(getAllPortfolios());
@@ -81,12 +71,13 @@ const PortfolioEdit: React.FC = () => {
   if (!loading && all.findIndex((x) => x.id == id) < 0) navigate("/portfolios");
 
   return (
-    <AuthenticatedLayout header="Dashboard" title="Edit Portfolio">
+    <AuthenticatedLayout header="Dashboard > Portfolios > Edit" title="Edit Portfolio">
       <div className="container mt-5">
         <h1 className="mb-4"></h1>
         <div className="card">
           <div className="card-body">
             <form onSubmit={handleSubmit}>
+              <label htmlFor="title">Title</label>
               <input
                 type="text"
                 name="title"
@@ -95,6 +86,7 @@ const PortfolioEdit: React.FC = () => {
                 onChange={handleChange}
                 required
               />
+              <label htmlFor="summary">Summary</label>
               <input
                 type="text"
                 name="summary"
@@ -103,6 +95,7 @@ const PortfolioEdit: React.FC = () => {
                 onChange={handleChange}
                 required
               />
+              <label htmlFor="description">Description</label>
               <textarea
                 name="description"
                 className="form-control mb-3"
@@ -110,6 +103,7 @@ const PortfolioEdit: React.FC = () => {
                 onChange={handleChange}
                 required
               />
+              <label htmlFor="technologies">Technologies</label>
               <input
                 type="text"
                 name="technologies"
@@ -118,6 +112,7 @@ const PortfolioEdit: React.FC = () => {
                 onChange={handleChange}
                 required
               />
+              <label htmlFor="link">Link</label>
               <input
                 type="text"
                 name="link"
@@ -126,6 +121,7 @@ const PortfolioEdit: React.FC = () => {
                 onChange={handleChange}
                 required
               />
+              <label htmlFor="imageUrl">Image Url</label>
               <input
                 type="text"
                 name="imageUrl"

@@ -1,26 +1,13 @@
 import API from "../../Helpers/axiosInstance";
-import { ExperienceType } from "../../Types/global";
 import { EXPERIENCE_ENDPOINTS } from "../../Helpers/endpoints";
-import { createExperienceSuccess, deleteExperienceSuccess, experiencesSuccess, UpdateExperienceSuccess } from "./Reducer";
+import {
+  deleteExperienceSuccess,
+  experiencesSuccess,
+  UpdateExperienceSuccess,
+} from "./Reducer";
+import { ExperienceType } from "../../Types/global";
 
 // Fetch all experiences
-export const getExperiences = () => async (dispatch: any) => {
-  try {
-    const response = await API.get<{
-      success: boolean;
-      experiences: ExperienceType[];
-    }>(EXPERIENCE_ENDPOINTS.PUBLIC_LIST);
-
-    if (response != null && response.data != null) {
-      let results = response.data;
-      if (results.success) {
-        dispatch(experiencesSuccess(results.experiences));
-      }
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
 export const getAllExperiences = () => async (dispatch: any) => {
   try {
     const response = await API.get<{
@@ -51,7 +38,6 @@ export const createExperience =
       if (response != null && response.data != null) {
         let results = response.data;
         if (results.success) {
-          dispatch(createExperienceSuccess(results.experience));
           return results;
         } else {
           return results;
@@ -69,7 +55,7 @@ export const updateExperience =
   ({ id, experience }: { id: string; experience: Partial<ExperienceType> }) =>
   async (dispatch: any) => {
     try {
-      const response = await API.post<{
+      const response = await API.put<{
         success: boolean;
         experience: ExperienceType;
         errors: string[];
@@ -77,11 +63,9 @@ export const updateExperience =
       if (response != null && response.data != null) {
         let results = response.data;
         if (results.success) {
-          dispatch(UpdateExperienceSuccess(results.experience));
-          return results;
-        } else {
-          return results;
+          dispatch(UpdateExperienceSuccess(experience));
         }
+        return results;
       } else {
         return null;
       }

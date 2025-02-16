@@ -56,7 +56,6 @@ const MainLayout: React.FC<LayoutProps> = ({
           </p>
         </div>
       </footer>
-      <AlertComponent />
     </div>
   );
 };

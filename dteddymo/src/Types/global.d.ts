@@ -44,17 +44,17 @@ export interface ExperienceType {
 	duration: string;
 	description: string;
 	link: string;
-	imageUrl: string;
 	responsibilities?: ResponsibilityType[];
 }
 
 export interface ExperienceCreateType {
 	title: string;
+	jobtitle: string;
+	company: string;
+	duration: string;
 	description: string;
-	technologies: string[];
 	link: string;
 	imageUrl: string;
-	responsibilities?: Responsibility[];
 }
 
 interface ContactType {

@@ -11,15 +11,13 @@ const PortfolioList: React.FC = () => {
   const {  all, loading } = useSelector((state: RootState) => state.portfolios);
   
   useEffect(() => {
-    if (all == null || all.length < 1) {
-      dispatch(getAllPortfolios());
-    }
-  }, [all]);
+    dispatch(getAllPortfolios());
+  }, []);
   
   return (
-		<AuthenticatedLayout header="Dashboard" title="Portfolios">
+		<AuthenticatedLayout header="Dashboard > Portfolios" title="Portfolios">
     <div className="container">
-      <Link to="/portfolios/create" className="btn btn-primary mb-3">Create Portfolio</Link>
+      <Link to="/portfolios/create" className="btn btn-primary my-3">Create Portfolio</Link>
       {loading ? <p>Loading...</p> : (
         <Table striped bordered hover>
           <thead>

@@ -1,69 +1,164 @@
-import React, { useState } from "react";
-import { ExperienceType } from "../../Types/global";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
-import { updateExperience } from "../../slices/Experiences/Thunk";
-import { AppDispatch } from "../../store";
+import { getAllExperiences, updateExperience } from "../../slices/Experiences/Thunk";
+import { AppDispatch, RootState } from "../../store";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import { addAlertMessage } from "../../slices/Alerts/Thunk";
+import { v4 as uuidv4 } from 'uuid';
 
-const ExperienceEdit: React.FC<{ experience?: ExperienceType }> = ({ experience }) => {
-    const dispatch = useDispatch<AppDispatch>();
+const ExperienceEdit: React.FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
+  const { all, loading } = useSelector((state: RootState) => state.experiences);
 
-    const [formData, setFormData] = useState<ExperienceType>({
-		id: experience?.id || "",
-        title: experience?.title || "",
-        description: experience?.description || "",
-        technologies: experience?.technologies || [],
-        link: experience?.link || "",
-        imageUrl: experience?.imageUrl || "",
-    });
+  const { id } = useParams<{ id: string }>();
 
-    const [errors, setErrors] = useState<Partial<ExperienceType>>({});
+  const [form, setForm] = useState({
+    id: "",
+    title: "",
+    jobtitle: "",
+    company: "",
+    duration: "",
+    description: "",
+    link: "",
+  });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
-    };
+  useEffect(() => {
+    if (all == null || all.length < 1) {
+      dispatch(getAllExperiences());
+    } else {
+      let currentExperience = all.findIndex((x) => x.id == id);
+      if (currentExperience < 0) {
+        navigate("/experiences");
+      } else {
+        // setExperience(all[currentExperience]);
+        let newExperience = all[currentExperience];
+        setForm(newExperience);
+      }
+    }
+  }, [id, all]);
 
-    const handleTechnologiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const values = e.target.value.split(/,(?=(?:(?:[^"]*"[^"]*")|(?![^"]*"))*$)/).map(value => value.trim());
-        setFormData({ ...formData, technologies: values });
-    };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-    return (
-        <AuthenticatedLayout>
-            <div className="container">
-                <h2 className="h4 font-weight-bold text-dark">Edit Experience</h2>
-                <form>
-                    <div className="mb-3">
-                        <label htmlFor="title" className="form-label">Title</label>
-                        <input type="text" className="form-control" id="title" value={formData.title} onChange={handleChange} />
-                        {errors.title && <small className="text-danger">{errors.title}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="description" className="form-label">Description</label>
-                        <textarea className="form-control" id="description" rows={5} value={formData.description} onChange={handleChange} />
-                        {errors.description && <small className="text-danger">{errors.description}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="technologies" className="form-label">Technologies</label>
-                        <input type="text" className="form-control" id="technologies" value={formData.technologies.join(", ")} onChange={handleTechnologiesChange} />
-                        {errors.technologies && <small className="text-danger">{errors.technologies}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="link" className="form-label">Link</label>
-                        <input type="text" className="form-control" id="link" value={formData.link} onChange={handleChange} />
-                        {errors.link && <small className="text-danger">{errors.link}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="imageUrl" className="form-label">Image Url</label>
-                        <input type="text" className="form-control" id="imageUrl" value={formData.imageUrl} onChange={handleChange} />
-                        {errors.imageUrl && <small className="text-danger">{errors.imageUrl}</small>}
-                    </div>
-                    <button type="submit" className="btn btn-primary">Update</button>
-                </form>
-            </div>
-        </AuthenticatedLayout>
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    let returnData = await dispatch(
+      updateExperience({
+        id: form.id,
+        experience: form,
+      })
     );
+
+    if (returnData?.success) {
+      dispatch(addAlertMessage({
+        id :  uuidv4(),
+        text : "experience updated successfully",
+        alertType : "success"
+      }));
+    }
+
+  };
+
+  if (loading) return <p>Loading...</p>;
+  if (!loading && all.findIndex((x) => x.id == id) < 0) navigate("/experiences");
+
+  return (
+    <AuthenticatedLayout header="Dashboard > Experiences > Edit" title="Edit Experience">
+    <div className="container mt-5">
+      <h1 className="mb-4"></h1>
+      <div className="card">
+        <div className="card-body">
+          <h2 className="h4 font-weight-bold text-dark">Experience Edit</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="mb-3">
+              <label htmlFor="title" className="form-label">
+                Title
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="title" className="form-label">
+                Job Title
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="jobtitle"
+                value={form.jobtitle}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="title" className="form-label">
+                Company
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="company"
+                value={form.company}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="title" className="form-label">
+                Duration
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="duration"
+                value={form.duration}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="description" className="form-label">
+                Description
+              </label>
+              <textarea
+                className="form-control"
+                name="description"
+                value={form.description}
+                rows={5}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="link" className="form-label">
+                Link
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                name="link"
+                value={form.link}
+                onChange={handleChange}
+              />
+            </div>
+            <button type="submit" className="btn btn-primary">
+              Edit
+            </button>
+            <Link to={"/experiences"} className="btn btn-secondary mx-2">
+              Back to List
+            </Link>
+          </form>
+        </div>
+      </div>
+    </div>
+    </AuthenticatedLayout>
+  );
 };
 
 export default ExperienceEdit;

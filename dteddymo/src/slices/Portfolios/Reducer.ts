@@ -21,10 +21,6 @@ const portfolioSlice = createSlice({
       state.all = action.payload;
       state.loading = false;
     },
-    createPortfolioSuccess(state, action) {
-      state.all = [...state.all, action.payload];
-      state.loading = false;
-    },
     UpdatePortfolioSuccess(state, action) {
       state.all = state.all.map(item =>
         item.id === action.payload.id ? { ...item, ...action.payload } : item
@@ -40,7 +36,6 @@ const portfolioSlice = createSlice({
 
 export const {
   portfoliosSuccess,
-  createPortfolioSuccess,
   UpdatePortfolioSuccess,
   deletePortfolioSuccess
 } = portfolioSlice.actions

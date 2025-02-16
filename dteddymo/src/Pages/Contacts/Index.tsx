@@ -15,11 +15,9 @@ const ContactList: React.FC = () => {
 			dispatch(getAllContacts());
 		}
 	}, [all]);
-  
-	if (!loading) return <p>Loading...</p>;
-  
+
 	return (
-		<AuthenticatedLayout header="Dashboard" title="Contact List">
+		<AuthenticatedLayout header="Dashboard > Contact" title="Contact List">
 
 			<div className="container mt-5">
 				<h1 className="mb-4">Contact Messages</h1>
@@ -36,7 +34,7 @@ const ContactList: React.FC = () => {
 						</tr>
 					</thead>
 					<tbody>
-						{all?.map((contact) => (
+						{loading ? <tr><td colSpan={7}>Loading...</td></tr> : all?.map((contact) => (
 							<tr key={contact.id}>
 								<td>{contact.id}</td>
 								<td>{contact.name}</td>

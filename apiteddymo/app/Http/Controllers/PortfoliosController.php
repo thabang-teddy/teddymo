@@ -28,7 +28,9 @@ class PortfoliosController extends Controller
 
         $portfolio = Portfolio::create($validated);
 
-        return response()->json($portfolio, 201);
+        // return response()->json($portfolio, 201);
+        return response()->json(['success' => true], 200);
+        // return response()->json(['success' => true , 'portfolio' => $portfolio], 200);
     }
 
     public function show(Portfolio $portfolio): JsonResponse

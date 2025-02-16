@@ -1,83 +1,136 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ExperienceCreateType } from "../../Types/global";
 import { useDispatch } from "react-redux";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import { createExperience } from "../../slices/Experiences/Thunk";
 import { AppDispatch } from "../../store";
+import { addAlertMessage } from "../../slices/Alerts/Thunk";
+import { v4 as uuidv4 } from "uuid";
 
 const ExperienceCreate: React.FC = () => {
-	  const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
-    const [formData, setFormData] = useState<ExperienceCreateType>({
-        title: "",
-        description: "",
-        technologies: [],
-        link: "",
-        imageUrl: "",
-    });
+  const [form, setForm] = useState({
+    title: "",
+    jobtitle: "",
+    company: "",
+    duration: "",
+    description: "",
+    link: "",
+  });
 
-    const [errors, setErrors] = useState<Partial<ExperienceCreateType>>({});
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { id, value } = e.target;
-        setFormData({ ...formData, [id]: value });
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    let returnData = await dispatch(createExperience(form));
+    if (returnData?.success) {
+      dispatch(
+        addAlertMessage({
+          id: uuidv4(),
+          text: "experience created successfully",
+          alertType: "success",
+        })
+      );
+      navigate("/experiences");
+    }
+  };
 
-    const handleTechnologiesChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const values = e.target.value.split(/,(?=(?:(?:[^"]*"[^"]*")|(?![^"]*"))*$)/).map(value => value.trim());
-        setFormData({ ...formData, technologies: values });
-    };
-
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
-        dispatch(createExperience(formData))
-            .then((data : any) => {
-                if (data != null && data.payload != null) {
-                    navigate("/dashboard/experiences");
-                } else {
-                    setErrors((prevErrors) => ({...prevErrors, formMain: "Could not create experience"}));
-                }
-            })
-            .catch(() => setErrors((prevErrors) => ({...prevErrors, formMain: "Could not create experience"})));
-    };
-
-    return (
-        <AuthenticatedLayout>
-            <div className="container">
-                <h2 className="h4 font-weight-bold text-dark">Experience Create</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="mb-3">
-                        <label htmlFor="title" className="form-label">Title</label>
-                        <input type="text" className="form-control" id="title" value={formData.title} onChange={handleChange} />
-                        {errors.title && <small className="text-danger">{errors.title}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="description" className="form-label">Description</label>
-                        <textarea className="form-control" id="description" rows={5} value={formData.description} onChange={handleChange} />
-                        {errors.description && <small className="text-danger">{errors.description}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="technologies" className="form-label">Technologies</label>
-                        <input type="text" className="form-control" id="technologies" value={formData.technologies.join(", ")} onChange={handleTechnologiesChange} />
-                        {errors.technologies && <small className="text-danger">{errors.technologies}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="link" className="form-label">Link</label>
-                        <input type="text" className="form-control" id="link" value={formData.link} onChange={handleChange} />
-                        {errors.link && <small className="text-danger">{errors.link}</small>}
-                    </div>
-                    <div className="mb-3">
-                        <label htmlFor="imageUrl" className="form-label">Image Url</label>
-                        <input type="text" className="form-control" id="imageUrl" value={formData.imageUrl} onChange={handleChange} />
-                        {errors.imageUrl && <small className="text-danger">{errors.imageUrl}</small>}
-                    </div>
-                    <button type="submit" className="btn btn-primary">Create</button>
-                </form>
-            </div>
-        </AuthenticatedLayout>
-    );
+  return (
+    <AuthenticatedLayout
+      header="Dashboard > Experiences > Create"
+      title="Create Experience"
+    >
+      <div className="container mt-5">
+        <h1 className="mb-4"></h1>
+        <div className="card">
+          <div className="card-body">
+            <h2 className="h4 font-weight-bold text-dark">Experience Create</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">
+                  Title
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="title"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">
+                  Job Title
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="jobtitle"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">
+                  Company
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="company"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="title" className="form-label">
+                  Duration
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="duration"
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="description" className="form-label">
+                  Description
+                </label>
+                <textarea
+                  className="form-control"
+                  name="description"
+                  rows={5}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="mb-3">
+                <label htmlFor="link" className="form-label">
+                  Link
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="link"
+                  onChange={handleChange}
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Create
+              </button>
+              <Link to={"/experiences"} className="btn btn-secondary mx-2">
+                Back to List
+              </Link>
+            </form>
+          </div>
+        </div>
+      </div>
+    </AuthenticatedLayout>
+  );
 };
 
 export default ExperienceCreate;

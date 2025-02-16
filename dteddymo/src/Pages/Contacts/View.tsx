@@ -31,7 +31,7 @@ const ContactView: React.FC = () => {
   if (!loading && contact == null) navigate("/contacts");
 
   return (
-    <AuthenticatedLayout header="Dashboard" title="Contact Details">
+    <AuthenticatedLayout header="Dashboard > Contacts > View" title="Contact Details">
       <div className="container mt-5">
         <h1 className="mb-4">View Contact Message</h1>
         <div className="card">

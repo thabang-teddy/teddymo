@@ -10,7 +10,6 @@ const BlankMainLayout: React.FC<LayoutProps> = ({
   return (
     <div className="d-flex flex-column vh-100 vw-100">
       {children}
-      <AlertComponent />
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store";
 import { checklogin } from "./slices/Auth/Thunk";
 import NonAuth from "./Routes/NonAuth";
+import AlertComponent from "./Components/AlertComponent";
 
 const App: React.FC = () => {
   // const { user } = useSelector((state: RootState) => state.auth);
@@ -18,39 +19,42 @@ const App: React.FC = () => {
     }, []);
   
   return (
-    <Routes>
-      {publicRoutes?.map(({ path, component }) => (
-        <Route
-          key={path}
-          path={path}
-          element={<NonAuth>{component}</NonAuth>} // Use NonAuthLayout for public pages
-        />
-      ))}
-      
-      {NonAuthRoutes?.map(({ path, component }) => (
-        <Route
-          key={path}
-          path={path}
-          element={<NonAuth>{component}</NonAuth>} // Use NonAuthLayout for public pages
-        />
-      ))}
+    <>
+      <Routes>
+        {publicRoutes?.map(({ path, component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<NonAuth>{component}</NonAuth>} // Use NonAuthLayout for public pages
+          />
+        ))}
+        
+        {NonAuthRoutes?.map(({ path, component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<NonAuth>{component}</NonAuth>} // Use NonAuthLayout for public pages
+          />
+        ))}
 
-      {authProtectedRoutes?.map(({ path, component }) => (
+        {authProtectedRoutes?.map(({ path, component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={
+              <AuthProtected>{component}</AuthProtected>
+            }
+          />
+        ))}
+        
+        {/* For error or unknown routes */}
         <Route
-          key={path}
-          path={path}
-          element={
-            <AuthProtected>{component}</AuthProtected>
-          }
+          path="*"
+          element={<BlankMainLayout><h1>404 - Not Found</h1></BlankMainLayout>}
         />
-      ))}
-      
-      {/* For error or unknown routes */}
-      <Route
-        path="*"
-        element={<BlankMainLayout><h1>404 - Not Found</h1></BlankMainLayout>}
-      />
-    </Routes>
+      </Routes>
+      <AlertComponent />
+    </>
   );
 };
 
