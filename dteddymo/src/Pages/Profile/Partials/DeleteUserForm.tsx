@@ -5,11 +5,11 @@
 // import SecondaryButton from '@/Components/SecondaryButton';
 // import TextInput from '@/Components/TextInput';
 // import { useForm } from '@inertiajs/react';
-import { FormEventHandler, useRef, useState } from 'react';
+// import { FormEventHandler, useRef, useState } from 'react';
 
 const DeleteUserForm = () => {
-    const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
-    const passwordInput = useRef<HTMLInputElement>(null);
+    // const [confirmingUserDeletion, setConfirmingUserDeletion] = useState(false);
+    // const passwordInput = useRef<HTMLInputElement>(null);
 
     // const {
     //     data,
@@ -23,27 +23,27 @@ const DeleteUserForm = () => {
     //     password: '',
     // });
 
-    const confirmUserDeletion = () => {
-        setConfirmingUserDeletion(true);
-    };
+    // const confirmUserDeletion = () => {
+    //     // setConfirmingUserDeletion(true);
+    // };
 
-    const deleteUser: FormEventHandler = (e) => {
-        e.preventDefault();
+    // const deleteUser: FormEventHandler = (e) => {
+    //     e.preventDefault();
 
-        // destroy(route('profile.destroy'), {
-        //     preserveScroll: true,
-        //     onSuccess: () => closeModal(),
-        //     onError: () => passwordInput.current?.focus(),
-        //     onFinish: () => reset(),
-        // });
-    };
+    //     // destroy(route('profile.destroy'), {
+    //     //     preserveScroll: true,
+    //     //     onSuccess: () => closeModal(),
+    //     //     onError: () => passwordInput.current?.focus(),
+    //     //     onFinish: () => reset(),
+    //     // });
+    // };
 
-    const closeModal = () => {
-        // setConfirmingUserDeletion(false);
+    // const closeModal = () => {
+    //     // setConfirmingUserDeletion(false);
 
-        // clearErrors();
-        // reset();
-    };
+    //     // clearErrors();
+    //     // reset();
+    // };
 
     return (
         <section className="mb-4 w-100">

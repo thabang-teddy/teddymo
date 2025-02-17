@@ -1,12 +1,12 @@
-import { useState } from "react";
+// import { useState } from "react";
 import AuthenticatedLayout from "../../Layouts/AuthenticatedLayout";
 import DeleteUserForm from "./Partials/DeleteUserForm";
 import UpdatePasswordForm from "./Partials/UpdatePasswordForm";
 import UpdateProfileInformationForm from "./Partials/UpdateProfileInformationForm";
 
 const ProfileEdit = () => {
-  const [mustVerifyEmail, setMustVerifyEmail] = useState(false);
-  const [status, setStatus] = useState("");
+  // const [mustVerifyEmail, setMustVerifyEmail] = useState(false);
+  // const [status, setStatus] = useState("");
 
   return (
     <AuthenticatedLayout header="Profile" title="Profile">

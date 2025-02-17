@@ -28,7 +28,7 @@ export const getAllPortfolios = () => async (dispatch: any) => {
 
 // Create new portfolio
 export const createPortfolio =
-  (portfolio: Omit<PortfolioType, "id">) => async (dispatch: any) => {
+  (portfolio: Omit<PortfolioType, "id">) => async () => {
     try {
       const response = await API.post<{
         success: boolean;

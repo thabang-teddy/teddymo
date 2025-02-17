@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AuthState, User } from "../../Types/auth.ts";
-import { login, logout } from "./Thunk.ts";
+import { createSlice } from "@reduxjs/toolkit";
+import { AuthState } from "../../Types/auth.ts";
+// import { login, logout } from "./Thunk.ts";
 
 const initialState: AuthState = {
   user: null,
@@ -17,7 +17,7 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
-    logoutUser(state, action) {
+    logoutUser(state) {
       state.user = null;
       state.loading = false;
       state.error = null;

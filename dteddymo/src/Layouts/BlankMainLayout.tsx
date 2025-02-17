@@ -1,14 +1,13 @@
 import React from "react";
 import { LayoutProps } from "../Types/global";
-import AlertComponent from "../Components/AlertComponent";
+// import AlertComponent from "../Components/AlertComponent";
 
 const BlankMainLayout: React.FC<LayoutProps> = ({
   title,
   children,
-  showNavbar = true,
 }) => {
   return (
-    <div className="d-flex flex-column vh-100 vw-100">
+    <div className="d-flex flex-column vh-100 vw-100" data-title={title}>
       {children}
     </div>
   );

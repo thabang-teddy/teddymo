@@ -4,7 +4,7 @@
 // import TextInput from '@/Components/TextInput';
 // import { Transition } from '@headlessui/react';
 // import { Link, useForm, usePage } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+// import { FormEventHandler } from 'react';
 
 
 const UpdateProfileInformation = () => {
@@ -26,11 +26,11 @@ const UpdateProfileInformation = () => {
     //         email: user.email,
     //     });
 
-    const submit: FormEventHandler = (e) => {
-        e.preventDefault();
+    // const submit: FormEventHandler = (e) => {
+    //     e.preventDefault();
 
-        // patch(route('profile.update'));
-    };
+    //     // patch(route('profile.update'));
+    // };
 
     return (
         <section className="w-100">

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { LayoutProps } from "../Types/global";
 import { useEffect, useState } from "react";
-import AlertComponent from "../Components/AlertComponent";
+// import AlertComponent from "../Components/AlertComponent";
 
 const AuthenticatedLayout: React.FC<LayoutProps> = ({
   header,
@@ -13,6 +13,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
 
   useEffect(() => {
     // window.tab = title + "TeddyMo";
+    setCurrentUrl(window.location.pathname);
   }, [title]);
 
   return (

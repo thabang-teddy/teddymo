@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { publicRoutes, authProtectedRoutes, NonAuthRoutes } from "./Routes/Allroutes";
 import AuthProtected from "./Routes/AuthProtected";
-import AuthenticatedLayout from "./Layouts/AuthenticatedLayout";
+// import AuthenticatedLayout from "./Layouts/AuthenticatedLayout";
 import BlankMainLayout from "./Layouts/BlankMainLayout";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store";

@@ -1,4 +1,5 @@
-const API_BASE_URL = "https://apiteddymo.test/api";
+// const API_BASE_URL = "https://apiteddymo.test/api";
+const API_BASE_URL = "https://connect.teddymo.co.za/api";
 
 export const PORTFOLIO_ENDPOINTS = {
   LIST: `${API_BASE_URL}/portfolios`,

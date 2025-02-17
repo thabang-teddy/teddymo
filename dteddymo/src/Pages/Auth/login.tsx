@@ -24,7 +24,7 @@ const Login: React.FC = () => {
             setErrors((prevErrors) => [...prevErrors, "Could not Login"]);
         }
       })
-      .catch((err) => setErrors((prevErrors) => [...prevErrors, "Could not Login"]));
+      .catch(() => setErrors((prevErrors) => [...prevErrors, "Could not Login"]));
   };
 
   return (

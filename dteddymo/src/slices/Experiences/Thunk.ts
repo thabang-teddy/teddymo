@@ -28,7 +28,7 @@ export const getAllExperiences = () => async (dispatch: any) => {
 
 // Create new experience
 export const createExperience =
-  (experience: Omit<ExperienceType, "id">) => async (dispatch: any) => {
+  (experience: Omit<ExperienceType, "id">) => async () => {
     try {
       const response = await API.post<{
         success: boolean;
