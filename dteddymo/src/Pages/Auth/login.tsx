@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import { login } from "../../slices/Auth/Thunk.ts";
 import { AppDispatch } from "../../store.ts";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [errors, setErrors] = useState<string[]>([]);
   const [email, setEmail] = useState<string>("");

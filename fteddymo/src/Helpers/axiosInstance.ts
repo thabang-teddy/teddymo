@@ -1,7 +1,8 @@
 import axios from "axios";
+import { API_BASE_URL } from "./endpoints";
 
 const API = axios.create({
-  baseURL: "https://apiteddymo.test/api",
+  baseURL: API_BASE_URL,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",

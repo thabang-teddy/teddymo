@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+// import { createAsyncThunk } from "@reduxjs/toolkit";
 import API from "../../Helpers/axiosInstance";
 import { User } from "../../Types/auth";
 import { endloading, loginSuccess, logoutUser } from "./Reducer";
