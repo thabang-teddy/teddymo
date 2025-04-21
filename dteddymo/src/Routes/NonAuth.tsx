@@ -9,9 +9,9 @@ const NonAuth: React.FC<{ children: JSX.Element }> = ({ children }) => {
 
   useEffect(() => {
     if (user && !loading) {
-      navigate("/");
+      navigate("/dashboard");
     }
-  }, [user]);
+  }, [user,loading]);
 
   return children;
 };

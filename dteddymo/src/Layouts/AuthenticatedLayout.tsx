@@ -41,7 +41,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                 <li className="nav-item">
                   <Link
                     to={"/"}
-                    className={`nav-link ${currentUrl == "/" ? "active" : ""}`}
+                    className={`nav-link ${currentUrl == "/" || currentUrl == "/dashboard" ? "active" : ""}`}
                   >
                     Dashboard
                   </Link>
@@ -76,7 +76,7 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                     Portfolio
                   </Link>
                 </li>
-                <li className="nav-item">
+                {/* <li className="nav-item">
                   <Link
                     to={"/profile"}
                     className={`nav-link ${
@@ -85,9 +85,9 @@ const AuthenticatedLayout: React.FC<LayoutProps> = ({
                   >
                     profile
                   </Link>
-                </li>
+                </li> */}
                 <li className="nav-item">
-                  <Link to={"logout"} className={`nav-link`}>
+                  <Link to={"/logout"} className={`nav-link`}>
                     Logout
                   </Link>
                 </li>

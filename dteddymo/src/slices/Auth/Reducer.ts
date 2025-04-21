@@ -22,12 +22,16 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = null;
     },
+    endloading(state) {
+      state.loading = false;
+    },
   },
 });
 
 export const {
   loginSuccess,
-  logoutUser
+  logoutUser,
+  endloading
 } = authSlice.actions
 
 export default authSlice.reducer;

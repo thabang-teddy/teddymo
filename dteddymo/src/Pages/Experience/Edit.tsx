@@ -70,7 +70,6 @@ const ExperienceEdit: React.FC = () => {
   return (
     <AuthenticatedLayout header="Dashboard > Experiences > Edit" title="Edit Experience">
     <div className="container mt-5">
-      <h1 className="mb-4"></h1>
       <div className="card">
         <div className="card-body">
           <h2 className="h4 font-weight-bold text-dark">Experience Edit</h2>

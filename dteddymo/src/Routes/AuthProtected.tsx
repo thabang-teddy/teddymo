@@ -11,7 +11,7 @@ const AuthProtected: React.FC<{ children: JSX.Element }> = ({ children }) => {
     if (!user && !loading) {
       navigate("/login");
     }
-  }, [user]);
+  }, [user,loading]);
 
   return children;
 };

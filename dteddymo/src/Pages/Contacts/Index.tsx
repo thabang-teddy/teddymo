@@ -11,7 +11,7 @@ const ContactList: React.FC = () => {
 	const {  all, loading } = useSelector((state: RootState) => state.contacts);
   
 	useEffect(() => {
-		if (all == null || all.length < 1) {
+		if ((all == null || all.length < 1) && loading) {
 			dispatch(getAllContacts());
 		}
 	}, [all]);

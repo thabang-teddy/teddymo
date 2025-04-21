@@ -25,7 +25,7 @@ const App: React.FC = () => {
           <Route
             key={path}
             path={path}
-            element={<NonAuth>{component}</NonAuth>} // Use NonAuthLayout for public pages
+            element={component} // Use NonAuthLayout for public pages
           />
         ))}
         

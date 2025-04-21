@@ -19,12 +19,12 @@ const publicRoutes : any[] | null = [
 
 const NonAuthRoutes : any[] | null = [
   { path: "/login", component: <Login /> },
-  { path: "/logout", component: <Logout /> },
 
 ];
 
 const authProtectedRoutes : any[] | null = [
   { path: "/", component: <Dashboard /> },
+  { path: "/dashboard", component: <Dashboard /> },
   { path: "/portfolios", component: <PortfolioList /> },
   { path: "/portfolios/create", component: <PortfolioCreate /> },
   { path: "/portfolios/edit/:id", component: <PortfolioEdit /> },
@@ -37,6 +37,8 @@ const authProtectedRoutes : any[] | null = [
 
   { path: "/contacts", component: <ContactList /> },
   { path: "/contacts/view/:id", component: <ContactView /> },
+
+  { path: "/logout", component: <Logout /> },
 ];
 
 export { publicRoutes, authProtectedRoutes , NonAuthRoutes};
