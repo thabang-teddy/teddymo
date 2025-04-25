@@ -17,22 +17,22 @@ services:
       - webnet
 
   # Static frontend for teddy.co.za
-  fteddymo:
-    image: nginx:alpine
-    container_name: fteddymo
-    volumes:
-      - ./fteddymo/dist:/usr/share/nginx/html:ro
-    networks:
-      - webnet
+  # fteddymo:
+  #   image: nginx:alpine
+  #   container_name: fteddymo
+  #   volumes:
+  #     - ./fteddymo/dist:/usr/share/nginx/html:ro
+  #   networks:
+  #     - webnet
 
   # Static frontend for deshboard.teddy.co.za
-  dteddymo:
-    image: nginx:alpine
-    container_name: dteddymo
-    volumes:
-      - ./dteddymo/dist:/usr/share/nginx/html:ro
-    networks:
-      - webnet
+  # dteddymo:
+  #   image: nginx:alpine
+  #   container_name: dteddymo
+  #   volumes:
+  #     - ./dteddymo/dist:/usr/share/nginx/html:ro
+  #   networks:
+  #     - webnet
 
   # Nginx Reverse Proxy
   nginx:
@@ -43,6 +43,8 @@ services:
       - "8001:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./dteddymo/dist:/usr/share/nginx/html/dteddymo:ro
+      - ./fteddymo/dist:/usr/share/nginx/html/fteddymo:ro
     depends_on:
       - apiteddymo
       - fteddymo
