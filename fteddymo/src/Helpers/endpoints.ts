@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://connect.teddymo.co.za/api";
+export const API_BASE_URL = "https://connect.teddymo.hogiclabs.co.za/api";
 // const API_BASE_URL = "https://apiteddymo.test/api";
 
 export const PORTFOLIO_ENDPOINTS = {
