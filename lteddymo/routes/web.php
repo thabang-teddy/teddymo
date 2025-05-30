@@ -24,8 +24,8 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/', [HomeController::class, 'show'])->name('home.show');
 Route::get('/portfolio', [PortfolioController::class, 'show'])->name('portfolio.show');
-// Route::get('/', [HomeController::class, 'show'])->name('home.show');
 Route::get('/experience', [ExperienceController::class, 'show'])->name('experience.show');
 Route::get('/about', [AboutController::class, 'show'])->name('about.show');
 Route::get('/contact', [ContactController::class, 'show'])->name('contact.show');
