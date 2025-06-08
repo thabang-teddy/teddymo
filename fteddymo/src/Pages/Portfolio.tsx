@@ -24,7 +24,7 @@ export default function Portfolio() {
 					<div className="col-md-12">
 						<h1 className="mb-4">Portfolio</h1>
 						<div className="row">
-							{portfolios.map((project : PortfolioType) => (
+							{portfolios?.map((project : PortfolioType) => (
 								<div key={project.id} className="col-md-4 mb-4">
 									<div className="card h-100">
 										<div className="card-body">

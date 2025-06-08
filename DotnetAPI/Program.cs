@@ -49,8 +49,24 @@ try
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
+    
+    // CORS policy
+    builder.Services.AddCors(options =>
+    {
+        options.AddPolicy("AllowLocalhost",
+            policy =>
+            {
+                policy.WithOrigins("http://localhost")
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+            });
+    });
+
+    builder.Services.AddAutoMapper(typeof(Program));
 
     var app = builder.Build();
+
+    app.UseCors("AllowLocalhost");
 
     // Migrate DB on startup
     using (var scope = app.Services.CreateScope())
@@ -77,11 +93,13 @@ try
     }
 
     // Configure the HTTP request pipeline.
-    if (app.Environment.IsDevelopment())
-    {
-        app.UseSwagger();
-        app.UseSwaggerUI();
-    }
+    //if (app.Environment.IsDevelopment())
+    //{
+    //    app.UseSwagger();
+    //    app.UseSwaggerUI();
+    //}
+    app.UseSwagger();
+    app.UseSwaggerUI();
 
     app.UseHttpsRedirection();
 
