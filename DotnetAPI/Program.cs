@@ -56,7 +56,11 @@ try
         options.AddPolicy("AllowLocalhost",
             policy =>
             {
-                policy.WithOrigins("http://localhost")
+                policy.WithOrigins(
+                        "http://localhost", "http://dashboard.localhost",
+                        "http://teddymo.co.za", "http://dashboard.teddymo.co.za",
+                        "https://teddymo.co.za", "https://dashboard.teddymo.co.za"
+                    )
                     .AllowAnyHeader()
                     .AllowAnyMethod();
             });
@@ -93,13 +97,11 @@ try
     }
 
     // Configure the HTTP request pipeline.
-    //if (app.Environment.IsDevelopment())
-    //{
-    //    app.UseSwagger();
-    //    app.UseSwaggerUI();
-    //}
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    if (app.Environment.IsDevelopment())
+    {
+       app.UseSwagger();
+       app.UseSwaggerUI();
+    }
 
     app.UseHttpsRedirection();
 
