@@ -11,20 +11,20 @@ services:
     networks:
       - webnet
 
-  nginx:
-    image: nginx:alpine
-    container_name: nginx
-    ports:
-      - "80:80"
-    volumes:
-      # - ./apiteddymo:/var/www/api
-      - ./fteddymo/dist:/var/www/frontend:ro
-      - ./dteddymo/dist:/var/www/dashboard:ro
-      - ./nginx/api.conf:/etc/nginx/conf.d/default.conf
-    depends_on:
-      - api
-    networks:
-      - webnet
+  # nginx:
+  #   image: nginx:alpine
+  #   container_name: nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     # - ./apiteddymo:/var/www/api
+  #     - ./fteddymo/dist:/var/www/frontend:ro
+  #     - ./dteddymo/dist:/var/www/dashboard:ro
+  #     - ./nginx/api.conf:/etc/nginx/conf.d/default.conf
+  #   depends_on:
+  #     - api
+  #   networks:
+  #     - webnet
 
 networks:
   webnet:
