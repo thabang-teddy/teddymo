@@ -26,5 +26,7 @@ services:
   #   networks:
   #     - webnet
 
+
 networks:
   webnet:
+    external: true

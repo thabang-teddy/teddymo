@@ -49,7 +49,6 @@ git init --bare
 nano /var/www/teddymo.git/hooks/post-receive
 ---
 
----
 ```bash
 #!/bin/bash
 
@@ -67,6 +66,7 @@ cd $GIT_WORK_TREE
 
 # Run Docker Compose build and up
 docker-compose -f docker-compose.live.yml up --build -d
+---
 
 Then make the script executable:
 ```bash
